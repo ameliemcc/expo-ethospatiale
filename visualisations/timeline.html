@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Timeline</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #333;
+      shape-rendering: crispEdges;
+    }
+
+    .year-label {
+      font-size: 10px;
+      text-anchor: middle;
+    }
+
+    .book {
+      font-size: 10px;
+      fill: #007bff;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    .dot {
+      fill: #333;
+    }
+
+    .leader {
+      fill: none;
+      stroke: #999;
+      stroke-width: 1px;
+    }
+
+    svg {
+      overflow: visible;
+    }
+
+    .scroll-container {
+      overflow-x: auto;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-container">
+    <svg width="5000" height="400"></svg>
+  </div>
+
+  <script>
+    
+    const rawData = `
+1979;La Vie et demie
+1979;Les Crapauds-brousse
+1998;En attendant le vote des bêtes sauvages
+1956;Le pauvre Christ de Bomba
+1982;Le Pleurer-Rire
+2014;Terre ceinte
+2008;Mathématiques congolaises
+2009;Another book near 2008
+1960;Les Bouts de bois de Dieu : Banty Mam Yall
+1961;La Vie et demie
+1962;Les Crapauds-brousse
+1963;En attendant le vote des bêtes sauvages
+1964;Le pauvre Christ de Bomba
+1965;Le Pleurer-Rire
+1966;Terre ceinte
+1967;Mathématiques congolaises
+2009;Another book near 2008
+1960;Les Bouts de bois de Dieu : Banty Mam Yall
+`;
+
+d3.text("../data/dates_titres.csv").then(csvText => {
+  const data = csvText.trim().split("\n").map(line => {
+      const [year, title] = line.split(";");
+      return { year: +year.trim(), title: title.trim() };
+    });
+
+    console.log(data)
+
+    const grouped = d3.groups(data, d => d.year);
+    const allYears = d3.range(1940, 2026);
+
+    const width = 5000;
+    const height = 600;
+    const margin = { top: 50, bottom: 50, left: 100, right: 100 };
+    const svg = d3.select("svg");
+
+    const x = d3.scaleLinear()
+      .domain([1940, 2025])
+      .range([margin.left, width - margin.right]);
+
+    const axisY = height / 2;
+
+    svg.append("g")
+      .attr("transform", `translate(0,${axisY})`)
+      .call(d3.axisBottom(x)
+        .tickValues(allYears)
+        .tickFormat(d => d)
+        .tickSize(-6))
+      .selectAll("text")
+      .attr("class", "year-label")
+      .attr("dy", "1.5em");
+
+    const labelHeight = 15;
+    const labelPadding = 4;
+
+    const yearToCount = Object.fromEntries(grouped.map(([year, books]) => [year, books.length]));
+
+    const radiusScale = d3.scaleSqrt()
+      .domain([1, d3.max(Object.values(yearToCount))])
+      .range([4, 12]);
+
+    const placedLabels = [];
+
+    function isOverlapping(a, b) {
+      return !(a.x + a.width < b.x || b.x + b.width < a.x || a.y + a.height < b.y || b.y + b.height < a.y);
+    }
+
+    function findSafeY(xPos, approxY, textWidth) {
+      let y = approxY;
+      let tries = 0;
+      while (tries < 100) {
+        const box = {
+          x: xPos - textWidth / 2,
+          y: y - labelHeight,
+          width: textWidth,
+          height: labelHeight
+        };
+        if (!placedLabels.some(other => isOverlapping(box, other))) {
+          placedLabels.push(box);
+          return y;
+        }
+        y -= labelHeight + labelPadding;
+        tries++;
+      }
+      return y;
+    }
+
+    grouped.forEach(([year, books]) => {
+      const xPos = x(year);
+      const radius = radiusScale(books.length);
+
+      svg.append("circle")
+        .attr("class", "dot")
+        .attr("cx", xPos)
+        .attr("cy", axisY)
+        .attr("r", radius);
+
+      books.forEach((book, i) => {
+        const textWidth = book.title.length * 6; 
+        const targetY = axisY - 20 - i * labelHeight;
+        const y = findSafeY(xPos, targetY, textWidth);
+
+        svg.append("text")
+          .attr("class", "book")
+          .attr("x", xPos)
+          .attr("y", y)
+          .text(book.title);
+
+        svg.append("line")
+          .attr("class", "leader")
+          .attr("x1", xPos)
+          .attr("y1", axisY)
+          .attr("x2", xPos)
+          .attr("y2", y - 4);
+      });
+    });
+      });
+  </script>
+</body>
+</html>

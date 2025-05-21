@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Radial tree</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/white.css">
+</head>
+<body>
+  <svg id="radial-tree" width="800" height="800"></svg>
+  <script>
+
+// Set up dimensions
+const width = 800;
+const radius = width / 2;
+
+const svg = d3.select("#radial-tree")
+  .attr("viewBox", [-radius, -radius, width, width])
+  .style("font", "10px sans-serif")
+  .style("user-select", "none");
+
+// Helper: radial projection
+const tree = d3.tree()
+  .size([2 * Math.PI, radius - 100]) // angle, radius
+  .separation(() => 1);
+
+// Load and parse CSV
+d3.text("data/titre_ethos.csv").then(csvText => {
+  const lines = csvText.trim().split("\n");
+  const entries = lines.map(line => {
+    const [book, ethosRaw] = line.split(";").map(d => d.trim());
+    const ethos = ethosRaw.replace("Ethos ", "");
+    return { book, ethos };
+  });
+console.log(entries)
+  const grouped = d3.group(entries, d => d.ethos);
+
+  const data = {
+    name: "ethos",
+    children: Array.from(grouped, ([ethos, books]) => ({
+      name: ethos,
+      children: books.map(b => ({ name: b.book }))
+    }))
+  };
+
+  const root = tree(d3.hierarchy(data));
+  const links = root.links();
+  var nodes = root.descendants();
+
+  // Links
+  svg.append("g")
+    .attr("fill", "none")
+    .attr("stroke", "#ccc")
+    .attr("stroke-opacity", 0.6)
+    .attr("stroke-width", 1.5)
+    .selectAll("path")
+    .data(links)
+    .join("path")
+    .attr("d", d3.linkRadial()
+      .angle(d => d.x)
+      .radius(d => d.y));
+
+  // Nodes
+  svg.append("g")
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+    .attr("transform", d => `
+      rotate(${d.x * 180 / Math.PI - 90})
+      translate(${d.y},0)
+    `)
+    .attr("r", 2.5)
+    .attr("fill", d => d.children ? "#555" : "#999");
+
+  // Labels
+  svg.append("g")
+    .selectAll("text")
+    .data(nodes)
+    .join("text")
+    .attr("transform", d => `
+      rotate(${d.x * 180 / Math.PI - 90})
+      translate(${d.y},0)
+      rotate(${d.x >= Math.PI ? 180 : 0})
+    `)
+    .attr("dy", "0.31em")
+    .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
+    .attr("text-anchor", d => d.x < Math.PI === !d.children ? "start" : "end")
+    .text(d => d.data.name)
+    .clone(true).lower()
+    .attr("stroke", "white");
+});
+
+
+
+  </script>
+
+</body>
+</html>
