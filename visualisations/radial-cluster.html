@@ -26,7 +26,7 @@ const tree = d3.tree()
   .separation(() => 1);
 
 // Load and parse CSV
-d3.text("data/titre_ethos.csv").then(csvText => {
+d3.text("../data/titre_ethos.csv").then(csvText => {
   const lines = csvText.trim().split("\n");
   const entries = lines.map(line => {
     const [book, ethosRaw] = line.split(";").map(d => d.trim());

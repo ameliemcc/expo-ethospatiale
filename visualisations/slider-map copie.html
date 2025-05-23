@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaflet Book Map by Ethos and Decade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    #controls {
+      padding: 10px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div id="controls">
+  <label><input type="checkbox" id="toggleDecadeFilter" checked> Filter by Decade</label><br>
+  <label for="decadeSlider">Select Decade:</label>
+  <input type="range" id="decadeSlider" min="1940" max="2020" step="10" value="1990">
+  <span id="decadeLabel">1990s</span>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- PapaParse JS -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script>
+  const map = L.map('map').setView([10, 0], 2);
+  const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  const baseLayers = { 'OpenStreetMap': osm };
+  const overlays = {};
+  const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+  const markerData = []; // all books
+  const ethosLayers = {}; // ethos name → Leaflet LayerGroup
+  const ethosColors = {
+    "Ethos cosmopolite": "green",
+    "Ethos d'opposition": "blue",
+    "Ethos de genre": "red",
+    "Ethos de la migrance": "purple",
+    "Ethos de la présence": "darkblue",
+    "Ethos mémoriel": "darkgreen"
+  };
+
+  // Create a custom color icon
+  function createColorIcon(color) {
+    return L.divIcon({
+      className: "custom-icon",
+      html: `<div style="background-color:${color};width:12px;height:12px;border-radius:50%;border:2px solid white;"></div>`,
+      iconSize: [12, 12],
+      iconAnchor: [6, 6]
+    });
+  }
+
+  function getDecade(year) {
+    return Math.floor(parseInt(year) / 10) * 10;
+  }
+
+
+
+ function createBookMarkers(data) {
+  data.forEach(row => {
+    const [title, ethos, yearStr, latStr, lngStr] = row.map(f => f.trim());
+    const year = parseInt(yearStr);
+    const lat = parseFloat(latStr);
+    const lng = parseFloat(lngStr);
+    if (!title || !ethos || isNaN(year) || isNaN(lat) || isNaN(lng)) return;
+
+    markerData.push({ title, ethos, year, lat, lng });
+  });
+
+  updateMarkersByDecade();
+}
+
+// Rebuild markers based on current filtering
+function updateMarkersByDecade() {
+  const activeDecade = parseInt(document.getElementById("decadeSlider").value);
+  const filtering = document.getElementById("toggleDecadeFilter").checked;
+
+  // Clear all ethos layers
+  for (const layer of Object.values(ethosLayers)) {
+    layer.clearLayers();
+  }
+
+  const locationMap = new Map(); // key: lat,lng; value: array of book objects
+
+  markerData.forEach(book => {
+    const decade = getDecade(book.year);
+    const shouldShow = !filtering || decade === activeDecade;
+    if (!shouldShow) return;
+
+    const key = `${book.lat},${book.lng}`;
+    if (!locationMap.has(key)) locationMap.set(key, []);
+    locationMap.get(key).push(book);
+  });
+
+  locationMap.forEach((booksAtLocation, key) => {
+    const [lat, lng] = key.split(",").map(Number);
+    const count = booksAtLocation.length;
+    const radius = 6 + count * 2; // Adjust scale factor as needed
+
+    const ethos = booksAtLocation[0].ethos;
+    const color = ethosColors[ethos] || "gray";
+    const popupContent = booksAtLocation.map(b => `<b>${b.title}</b> (${b.year})`).join("<br>");
+
+    const marker = L.circleMarker([lat, lng], {
+      radius: radius,
+      color: color,
+      fillColor: color,
+      fillOpacity: 0.8,
+      weight: 1
+    }).bindPopup(popupContent);
+
+    if (!ethosLayers[ethos]) {
+      ethosLayers[ethos] = L.layerGroup();
+      overlays[ethos] = ethosLayers[ethos];
+      layerControl.addOverlay(ethosLayers[ethos], ethos);
+    }
+
+    ethosLayers[ethos].addLayer(marker);
+  });
+
+  for (const layer of Object.values(ethosLayers)) {
+    layer.addTo(map);
+  }
+}
+
+
+ 
+      // Cr
+  Papa.parse("map-list.csv", {
+    download: true,
+    delimiter: ";",
+    skipEmptyLines: true,
+    complete: function(results) {
+      createBookMarkers(results.data);
+    }
+  });
+
+  // UI interactivity
+  document.getElementById("decadeSlider").addEventListener("input", () => {
+    const decade = document.getElementById("decadeSlider").value;
+    document.getElementById("decadeLabel").textContent = `${decade}s`;
+    updateMarkersByDecade();
+  });
+
+  document.getElementById("toggleDecadeFilter").addEventListener("change", () => {
+    updateMarkersByDecade();
+  });
+</script>
+
+</body>
+</html>
