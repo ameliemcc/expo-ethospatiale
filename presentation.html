@@ -21,13 +21,52 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
+<style>
+#mapFrame {
+  pointer-events: none;
+}
 
+</style>
 	<body>
+	<script>
+  const section = document.querySelector('section[data-background-iframe]');
+  const btn = document.getElementById('exitMapMode');
+
+  btn.addEventListener('click', () => {
+    // Reload the iframe to kill interaction
+    const iframeUrl = section.getAttribute('data-background-iframe');
+    section.removeAttribute('data-background-iframe');
+    section.setAttribute('data-background-iframe', iframeUrl);
+    
+    // Optionally hide the button
+    btn.style.display = 'none';
+  });
+
+  // Re-show the button when re-entering the slide
+  Reveal.on('slidechanged', event => {
+    if (event.currentSlide === section) {
+      btn.style.display = 'block';
+    }
+  });
+
+  document.getElementById('activateMap').addEventListener('click', () => {
+  document.getElementById('mapFrame').style.pointerEvents = 'auto';
+});
+</script>
+
 
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
+				<section>
+<section>
+  <div style="display: flex; gap: 10px; height: 90vh;">
+    <iframe src="visualisations/map-controls.html".html" style="width: 20%; height: 25%; border: none;"></iframe>
+    <iframe src="visualisations/map.html" style="width: 80%; height: 80%; border: none;"></iframe>
+  </div>
+</section>
+				</section>
 				<section>
 					<a href="https://revealjs.com">
 						<img src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg" alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
@@ -36,6 +75,44 @@
 					<p>
 						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> and <a href="https://github.com/hakimel/reveal.js/graphs/contributors">contributors</a></small>
 					</p>
+					  <button onclick="Reveal.next()" style="position:absolute; bottom:20px; right:20px; z-index:999; padding:10px; background:#fff; border-radius:6px; border:none; cursor:pointer;">
+  ⏭ Next
+</button>
+				</section>
+				<section>
+				<iframe id="mapFrame" src="visualisations/slider-map copie.html" style="width: 100%; height: 80vh;"></iframe>
+<iframe id="controlsFrame" src="visualisations/controls.html" style="width: 100%; height: 100px;"></iframe>
+
+<script>
+  window.addEventListener("message", function(event) {
+    // Forward the message from controls to map
+    const mapFrame = document.getElementById("mapFrame");
+    mapFrame.contentWindow.postMessage(event.data, "*");
+  });
+</script>
+
+				</section>
+				<section>
+  <button id="activateMap" style="position:absolute; top:10px; right:10px; z-index:10;">Activate Map</button>
+  <iframe id="mapFrame" src="visualisations/slider-map.html" style="width: 100%; height: 80vh; border: none; position: relative; z-index: 5; pointer-events: none;"></iframe>
+</section>
+				<section>
+					<iframe id="mapFrame" src="visualisations/slider-map.html" style="width: 100%; height: 80vh; border: none; position: relative; z-index: 5;"></iframe>
+
+				</section>
+<section>
+	
+  <iframe src="visualisations/slider-map.html" style="width: 100%; height: 80vh; border: none; position: relative; z-index: 5;"></iframe>
+</section>
+
+
+	<section>
+
+					<iframe src="visualisations/slider-map.html" width="50%" height="50" style="border:none;"></iframe>
+        <svg id="controls" width="200" height="200"></svg>
+<iframe src="visualisations/controls.html" style="border: none; width: 100%; height: 100px;"></iframe>
+
+	
 				</section>
 
 
@@ -44,17 +121,17 @@
 				<iframe src="visualisations/timeline.html" width="100%" height="650" style="border:none;"></iframe>
 				</section>
 
-
 				<section>
-					<h2>Hello There</h2>
+
 					<iframe src="visualisations/radial-cluster.html" width="100%" height="650" style="border:none;"></iframe>
 					<h2>Radial Tree from CSV</h2>
         <svg id="radial-tree" width="800" height="800"></svg>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+	
 				</section>
 
+				<section data-background-iframe="visualisations/slider-map.html" data-background-interactive>
+  <h2 style="position:absolute; z-index:10; top:20px; left:20px; color:white;">Hello There</h2>
+</section>
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>

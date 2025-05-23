@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    #map { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <script>
+    const map = L.map('map').setView([10, 0], 2);
+    const osm = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 8, minZoom: 2, attribution: '© OpenStreetMap © CARTO'
+    }).addTo(map);
+
+    const markerData = [];
+    const ethosLayers = {};
+    const overlays = {};
+    const ethosColors = {
+      "Ethos cosmopolite": "#E2B4BD",
+      "Ethos d'opposition": "#93A8AC",
+      "Ethos de genre": "#FFD447",
+      "Ethos de la migrance": "#3E5622",
+      "Ethos de la présence": "#DB7F67",
+      "Ethos environnemental": "#700353",
+      "Ethos mémoriel": "#345995"
+    };
+
+    function colorLayerControlLabels() {
+  const labels = document.querySelectorAll('.leaflet-control-layers-overlays label');
+  labels.forEach(label => {
+    const labelText = label.textContent.trim();
+    const color = ethosColors[labelText];
+    if (color) {
+      label.style.color = color;
+    }
+  });
+}
+    const layerControl = L.control.layers(null, overlays).addTo(map);
+
+    function getDecade(year) {
+      return Math.floor(year / 10) * 10;
+    }
+
+    function updateMarkers(filtering, activeDecade) {
+      for (const l of Object.values(ethosLayers)) l.clearLayers();
+
+      const locationMap = new Map();
+      markerData.forEach(book => {
+        if (filtering && getDecade(book.year) !== activeDecade) return;
+        const key = `${book.lat},${book.lng}`;
+        if (!locationMap.has(key)) locationMap.set(key, []);
+        locationMap.get(key).push(book);
+      });
+
+      locationMap.forEach((books, key) => {
+        const [lat, lng] = key.split(',').map(Number);
+        const count = books.length;
+        const radius = 6 + count * 2;
+        const ethos = books[0].ethos;
+        const color = ethosColors[ethos] || 'gray';
+
+        const marker = L.circleMarker([lat, lng], {
+          radius, color, fillColor: color, fillOpacity: 0.8, weight: 1
+        }).bindPopup(books.map(b => `<b>${b.title}</b> (${b.year})`).join('<br>'));
+
+        if (!ethosLayers[ethos]) {
+          ethosLayers[ethos] = L.layerGroup();
+          overlays[ethos] = ethosLayers[ethos];
+      layerControl.addOverlay(ethosLayers[ethos], ethos);
+setTimeout(colorLayerControlLabels, 0);
+        }
+
+        ethosLayers[ethos].addLayer(marker);
+      });
+
+      Object.values(ethosLayers).forEach(layer => layer.addTo(map));
+    }
+
+    Papa.parse("../data/map-list.csv", {
+      download: true,
+      delimiter: ";",
+      skipEmptyLines: true,
+      complete: function(results) {
+        results.data.forEach(row => {
+          const [title, ethos, yearStr, latStr, lngStr] = row.map(f => f.trim());
+          const year = parseInt(yearStr);
+          const lat = parseFloat(latStr);
+          const lng = parseFloat(lngStr);
+          if (!title || !ethos || isNaN(year) || isNaN(lat) || isNaN(lng)) return;
+          markerData.push({ title, ethos, year, lat, lng });
+        });
+        updateMarkers(true, 2020);
+      }
+    });
+
+    // Réception des messages depuis l'iframe des contrôles
+    window.addEventListener("message", (event) => {
+      const { filtering, decade } = event.data;
+      updateMarkers(filtering, decade);
+    });
+  </script>
+</body>
+</html>
