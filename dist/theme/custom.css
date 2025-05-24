@@ -2,7 +2,6 @@
  * custom theme for reveal.js project "configuration ethospatiale"
  *
  */
-@import url(https://fonts.googleapis.com/css?family=Courier+Prime:400,700,400italic,700italic);
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff;
 }
@@ -11,14 +10,14 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
  * GLOBAL STYLES
  *********************************************/
 :root {
-  --r-background-color: #f7f3de;
+  --r-background-color: #BBC9BF;
   --r-main-font: Palatino Linotype, Book Antiqua, Palatino, FreeSerif, serif;
-  --r-main-font-size: 40px;
-  --r-main-color: #333;
+  --r-main-font-size: 42px;
+  --r-main-color: #315659;
   --r-block-margin: 20px;
   --r-heading-margin: 0 0 20px 0;
   --r-heading-font: Palatino Linotype, Book Antiqua, Palatino, FreeSerif, serif;
-  --r-heading-color: #333;
+  --r-heading-color: #8C705F;
   --r-heading-line-height: 1.2;
   --r-heading-letter-spacing: normal;
   --r-heading-text-transform: uppercase;
@@ -30,9 +29,9 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-heading3-size: 1.55em;
   --r-heading4-size: 1em;
   --r-code-font: monospace;
-  --r-link-color: #8b743d;
-  --r-link-color-dark: rgb(118.15, 98.6, 51.85);
-  --r-link-color-hover: rgb(179.36, 150.84, 82.64);
+  --r-link-color: #3E5622;
+  --r-link-color-dark: rgb(52.7, 73.1, 28.9);
+  --r-link-color-hover: rgb(102.3, 141.9, 56.1);
   --r-selection-background-color: rgba(79, 64, 28, 0.99);
   --r-selection-color: #fff;
   --r-overlay-element-bg-color: 0, 0, 0;
@@ -40,13 +39,13 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 
 .reveal-viewport {
-  background: rgb(53, 111, 145);
-  background: -moz-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, rgb(53, 111, 145) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgb(255, 255, 255)), color-stop(100%, rgb(53, 111, 145)));
-  background: -webkit-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, rgb(53, 111, 145) 100%);
-  background: -o-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, rgb(53, 111, 145) 100%);
-  background: -ms-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, rgb(53, 111, 145) 100%);
-  background: radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, rgb(53, 111, 145) 100%);
+  background: #B0D1D4;
+  background: -moz-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, #B0D1D4 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgb(255, 255, 255)), color-stop(100%, #B0D1D4));
+  background: -webkit-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, #B0D1D4 100%);
+  background: -o-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, #B0D1D4 100%);
+  background: -ms-radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, #B0D1D4 100%);
+  background: radial-gradient(center, circle cover, rgb(255, 255, 255) 0%, #B0D1D4 100%);
   background-color: var(--r-background-color);
 }
 
