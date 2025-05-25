@@ -2,13 +2,32 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-55 heures
+93 heures
+
+## 24 mai
+*8 heures*
+
+- rédaction texte
+- tests implémentation reveal
+
+## 23 mai 
+*8 heures*
+
+- Carte avec slider - intégration dans reveal
+- modification de la structure html pour permettre la mise à jour de la carte
+
+## 22 mai
+*8 heures*
+
+- Carte leaflet
+- Formattage des données, normalisation, latitudes longitudes etc.
+- Exploration expositions en ligne
 
 ## 21 mai
-*4 heures*
-
-Radial cluster - importation données csv préformattées
-Frise chronologique - importation données csv
+*8 heures*
+- Carte leaflet
+- Radial cluster - importation données csv préformattées
+- Frise chronologique - importation données csv
 
 ## 20 mai
 *6 heures*
@@ -18,63 +37,66 @@ frise chronologique
 ## 19 mai
 *5 heures*
 
-Conception expo
-tutos reveal.js
+- Conception expo
+- tutos reveal.js
 
 ## 16 mai
-*4 heures*
+*5 heures*
 
-séminaire ethospatial - intéret d'une frise chronologique
+- séminaire ethospatial - intéret d'une frise chronologique
 
 ## 14 mai
-*4 heures*
+*5 heures*
 
-séminaire ethospatial - définitions de genre littéraire
+- séminaire ethospatial - définitions de genre littéraire
 
 ## 13 mai
 *3 heures*
 
-Mise en place git etc, réglage de bugs
+- Mise en place git etc, réglage de bugs
 
 ## 8 mai  
-*5 heures*
+*7 heures*
 
-Lectures de définitions d'ethos, d'espace et de focalisation, pour améliorer la conception de la présentation
+- rédaction texte 
+- Lectures pour améliorer la conception de la présentation
 
 ## 7 mai  
-*4 heures*  
+*7 heures*  
 
-Visionnage tutoriels reveal.js, prise en main
+- rédaction texte 
+- Visionnage tutoriels reveal.js, prise en main
 
 ## 6 mai  
-*4 heures*
+*7 heures*
 
-installation reveal, git etc
+- rédaction texte 
+- installation reveal, git etc
 
 ## 9 avril
 *2 heures*
 
-Rencontre aves IP, discussion des objectifss, présentation reveal.js
+- Rencontre aves IP, discussion des objectifss, présentation reveal.js
 
 ## 6 avril  
 *4 heures*  
 
-Conception visualisation en constellation
+- Conception visualisation en constellation
 
 ## 4 février
 *3 heures*
 
-Lectures, observation de visualisations de données
+- Lectures, observation de visualisations de données
 
 ## 2 février
 *3 heures*
 
-Lectures, observation de visualisations de données
+- Lectures, observation de visualisations de données
 
 ## 18 janvier
 *4 heures*
 
-Conception des objectifs du projet
+- Conception des objectifs du projet
 
 
 

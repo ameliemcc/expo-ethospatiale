@@ -13,6 +13,7 @@
 <body>
   <div id="map"></div>
 
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
@@ -35,6 +36,8 @@
       "Ethos mémoriel": "#345995"
     };
 
+
+    
     function colorLayerControlLabels() {
   const labels = document.querySelectorAll('.leaflet-control-layers-overlays label');
   labels.forEach(label => {
@@ -51,40 +54,66 @@
       return Math.floor(year / 10) * 10;
     }
 
-    function updateMarkers(filtering, activeDecade) {
-      for (const l of Object.values(ethosLayers)) l.clearLayers();
+ function updateMarkers(filtering, activeDecade) {
+  // Remember which layers are visible before clearing
+  const visibleEthos = new Set();
+  for (const [ethos, layer] of Object.entries(ethosLayers)) {
+    if (map.hasLayer(layer)) visibleEthos.add(ethos);
+  }
 
-      const locationMap = new Map();
-      markerData.forEach(book => {
-        if (filtering && getDecade(book.year) !== activeDecade) return;
-        const key = `${book.lat},${book.lng}`;
-        if (!locationMap.has(key)) locationMap.set(key, []);
-        locationMap.get(key).push(book);
-      });
+  // Clear and remove all layers
+  for (const layer of Object.values(ethosLayers)) {
+    layer.clearLayers();
+    map.removeLayer(layer);
+  }
 
-      locationMap.forEach((books, key) => {
-        const [lat, lng] = key.split(',').map(Number);
-        const count = books.length;
-        const radius = 6 + count * 2;
-        const ethos = books[0].ethos;
-        const color = ethosColors[ethos] || 'gray';
+  const locationMap = new Map();
 
-        const marker = L.circleMarker([lat, lng], {
-          radius, color, fillColor: color, fillOpacity: 0.8, weight: 1
-        }).bindPopup(books.map(b => `<b>${b.title}</b> (${b.year})`).join('<br>'));
+  markerData.forEach(book => {
+    if (filtering && getDecade(book.year) !== activeDecade) return;
+    const key = `${book.lat},${book.lng}`;
+    if (!locationMap.has(key)) locationMap.set(key, []);
+    locationMap.get(key).push(book);
+  });
 
-        if (!ethosLayers[ethos]) {
-          ethosLayers[ethos] = L.layerGroup();
-          overlays[ethos] = ethosLayers[ethos];
+  locationMap.forEach((books, key) => {
+    const [lat, lng] = key.split(',').map(Number);
+    const ethos = books[0].ethos;
+    const color = ethosColors[ethos] || 'gray';
+    const count = books.length;
+    const radius = 6 + count * 2;
+
+    const marker = L.circleMarker([lat, lng], {
+      radius,
+      color,
+      fillColor: color,
+      fillOpacity: 0.8,
+      weight: 1
+    }).bindPopup(books.map(b => `<b>${b.title}</b> (${b.year})`).join('<br>'));
+
+    if (!ethosLayers[ethos]) {
+      ethosLayers[ethos] = L.layerGroup();
+      overlays[ethos] = ethosLayers[ethos];
       layerControl.addOverlay(ethosLayers[ethos], ethos);
-setTimeout(colorLayerControlLabels, 0);
-        }
-
-        ethosLayers[ethos].addLayer(marker);
-      });
-
-      Object.values(ethosLayers).forEach(layer => layer.addTo(map));
+      setTimeout(colorLayerControlLabels, 0);
     }
+
+    ethosLayers[ethos].addLayer(marker);
+  });
+
+  // Add back only layers that were previously visible and have markers
+  for (const [ethos, layer] of Object.entries(ethosLayers)) {
+    if (layer.getLayers().length > 0) {
+      if (visibleEthos.has(ethos)) {
+        layer.addTo(map);
+      }
+    } else {
+      map.removeLayer(layer);
+    }
+  }
+}
+
+
 
     Papa.parse("../data/map-list.csv", {
       download: true,
@@ -99,7 +128,7 @@ setTimeout(colorLayerControlLabels, 0);
           if (!title || !ethos || isNaN(year) || isNaN(lat) || isNaN(lng)) return;
           markerData.push({ title, ethos, year, lat, lng });
         });
-        updateMarkers(true, 2020);
+       updateMarkers(true, 2020, true); // third arg: initialLoad = true
       }
     });
 

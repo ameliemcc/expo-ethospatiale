@@ -8,24 +8,39 @@
 </head>
 
 <body>
-  <svg id="radial-tree" width="700" height="700"></svg>
+  <svg id="radial-tree" width="900" ></svg>
   <script>
 
 // Set up dimensions
-const width = 800;
-const radius = width / 2;
+
+const CouleursEthos = {
+  cosmopolite: "#E2B4BD",
+  "d'opposition": "#93A8AC",
+  "de genre": "#FFD447",
+  "environnemental": "#700353",
+  "de la migrance": "#3E5622",
+  "de la présence": "#DB7F67",
+  "mémoriel": "#345995"
+};
+
+
+  const width = 1000;
+  const height = width;
+ const cx = width * 0.5; 
+  const cy = height * 0.52; 
+  const radius = Math.min(width, height) / 2 - 200;
 
 const svg = d3.select("#radial-tree")
-  .attr("viewBox", [-radius, -radius, width, width])
+  .attr("viewBox", [-cx, -cy, width, height])
   .style("font", "10px sans-serif")
   .style("user-select", "none");
 
-// Helper: radial projection
+
 const tree = d3.tree()
-  .size([2 * Math.PI, radius - 100]) // angle, radius
+  .size([2 * Math.PI, radius]) 
   .separation(() => 1);
 
-// Load and parse CSV
+// CSV
 d3.text("../data/titre_ethos.csv").then(csvText => {
   const lines = csvText.trim().split("\n");
   const entries = lines.map(line => {
@@ -44,22 +59,34 @@ console.log(entries)
     }))
   };
 
+
   const root = tree(d3.hierarchy(data));
   const links = root.links();
   var nodes = root.descendants();
 
-  // Links
-  svg.append("g")
-    .attr("fill", "none")
-    .attr("stroke", "#ccc")
-    .attr("stroke-opacity", 0.6)
-    .attr("stroke-width", 1.5)
-    .selectAll("path")
-    .data(links)
-    .join("path")
-    .attr("d", d3.linkRadial()
-      .angle(d => d.x)
-      .radius(d => d.y));
+  nodes.forEach(d => {
+  if (!d.children && d.parent) {
+    d.color = CouleursEthos[d.parent.data.name]; 
+  } else if (CouleursEthos[d.data.name]) {
+    d.color = CouleursEthos[d.data.name]; 
+  } else {
+    d.color = "#ccc"; 
+  }
+});
+
+// Links
+svg.append("g")
+  .attr("fill", "none")
+  .attr("stroke-opacity", 0.6)
+  .attr("stroke-width", 1.5)
+  .selectAll("path")
+  .data(links)
+  .join("path")
+  .attr("d", d3.linkRadial()
+    .angle(d => d.x)
+    .radius(d => d.y))
+  .attr("stroke", d => (d.target && d.target.color) ? d.target.color : "#ccc");
+
 
   // Nodes
   svg.append("g")
@@ -71,7 +98,7 @@ console.log(entries)
       translate(${d.y},0)
     `)
     .attr("r", 2.5)
-    .attr("fill", d => d.children ? "#555" : "#999");
+.attr("fill", d => d.color || "#999");
 
   // Labels
   svg.append("g")
@@ -86,12 +113,11 @@ console.log(entries)
     .attr("dy", "0.31em")
     .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
     .attr("text-anchor", d => d.x < Math.PI === !d.children ? "start" : "end")
-    .text(d => d.data.name)
+.text(d => d.data.name)
+.style("fill", d => d.color || "black")
     .clone(true).lower()
     .attr("stroke", "white");
 });
-
-
 
   </script>
 

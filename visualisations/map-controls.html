@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: sans-serif;
       padding: 10px;
-      background: #f5f5f5;
+      background: #C5BEC2;
     }
   </style>
 </head>
@@ -19,24 +18,47 @@
   <input type="range" id="decadeSlider" min="1940" max="2020" step="10" value="2020">
   <span id="decadeLabel">2020</span>
 
-  <script>
-    const slider = document.getElementById("decadeSlider");
-    const checkbox = document.getElementById("toggleDecadeFilter");
-    const label = document.getElementById("decadeLabel");
-function sendUpdate() {
-  const filtering = checkbox.checked;
-  const decade = parseInt(slider.value);
-  label.textContent = decade;
+<script>
+  const slider = document.getElementById("decadeSlider");
+  const checkbox = document.getElementById("toggleDecadeFilter");
+  const label = document.getElementById("decadeLabel");
 
-  const mapFrame = parent.document.querySelector('iframe[src*="map.html"]');
-  if (mapFrame) {
-    mapFrame.contentWindow.postMessage({ filtering, decade }, "*");
+  // Load saved settings from localStorage
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedFiltering = localStorage.getItem("filtering");
+    const savedDecade = localStorage.getItem("decade");
+
+    if (savedFiltering !== null) {
+      checkbox.checked = savedFiltering === "true";
+    }
+    if (savedDecade !== null) {
+      slider.value = savedDecade;
+      label.textContent = savedDecade;
+    }
+
+    sendUpdate();
+  });
+
+  function sendUpdate() {
+    const filtering = checkbox.checked;
+    const decade = parseInt(slider.value);
+    label.textContent = decade;
+
+    // Save to localStorage
+    localStorage.setItem("filtering", filtering);
+    localStorage.setItem("decade", decade);
+
+    const mapFrame = parent.document.querySelector('iframe[src*="map-copie.html"]');
+    if (mapFrame) {
+      mapFrame.contentWindow.postMessage({ filtering, decade }, "*");
+    }
   }
-}
 
-    slider.addEventListener("input", sendUpdate);
-    checkbox.addEventListener("change", sendUpdate);
-  </script>
+  slider.addEventListener("input", sendUpdate);
+  checkbox.addEventListener("change", sendUpdate);
+</script>
+
+  
 </body>
 </html>
 

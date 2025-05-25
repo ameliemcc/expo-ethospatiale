@@ -22,59 +22,201 @@
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	</head>
 <style>
-#mapFrame {
-  pointer-events: none;
-}
+  .ethos-legend {
+	text-align: left;
+    background: #C5BEC2;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: fit-content;
+    max-width: 250px;
+	height: fit-content;
+  }
 
+  .ethos-item {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  .color-box {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 1px solid #333;
+  }
 </style>
 	<body>
-	<script>
-  const section = document.querySelector('section[data-background-iframe]');
-  const btn = document.getElementById('exitMapMode');
-
-  btn.addEventListener('click', () => {
-    // Reload the iframe to kill interaction
-    const iframeUrl = section.getAttribute('data-background-iframe');
-    section.removeAttribute('data-background-iframe');
-    section.setAttribute('data-background-iframe', iframeUrl);
-    
-    // Optionally hide the button
-    btn.style.display = 'none';
-  });
-
-  // Re-show the button when re-entering the slide
-  Reveal.on('slidechanged', event => {
-    if (event.currentSlide === section) {
-      btn.style.display = 'block';
-    }
-  });
-
-  document.getElementById('activateMap').addEventListener('click', () => {
-  document.getElementById('mapFrame').style.pointerEvents = 'auto';
-});
-</script>
+	
 	<div class="reveal">
 		<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
 				<section>
-					<a href="https://revealjs.com">
-						<img src="https://static.slid.es/reveal/logo-v1/reveal-white-text.svg" alt="reveal.js logo" style="height: 180px; margin: 0 auto 4rem auto; background: transparent;" class="demo-logo">
-					</a>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> and <a href="https://github.com/hakimel/reveal.js/graphs/contributors">contributors</a></small>
-					</p>
-				
+					<h1>Configuration EthoSpatiale </h1>
+					<h2>Pour une relecture critique de la littérature subsaharienne de langue française</h2>
 				</section>
-
 				<section>
-						<h2>Map</h2>
-				<div style="display: flex; gap: 10px; height: 90vh;">
-					<iframe src="visualisations/map-controls.html".html" style="width: 20%; height: 25%; border: none;"></iframe>
-					<iframe src="visualisations/map.html" style="width: 80%; height: 80%; border: none;"></iframe>
-				</div>
+					<p class="justify">
+						Cette exposition en ligne s’inscrit dans le prolongement du projet de recherche FNS <i>Configuration EthoSpatiale</i>, qui propose une relecture critique de la littérature subsaharienne de langue française à travers une approche novatrice, fondée sur l’articulation entre <b>ethos énonciatif</b> et <b>espaces géographiques, politiques et symboliques</b>. Ce projet a pour but de réévaluer les découpages habituels en périodes, auteurs ou mouvements, en valorisant à la place les configurations discursives dominantes qui traversent les textes.</p>
+					<p class="fragment justify">
+						Cette perspective permet de repenser l’histoire littéraire en identifiant des <i>ethos</i> qui structurent les œuvres de manière transversale. Ces catégories sont issues d’une lecture attentive des corpus, attentive à la manière dont les auteurs investissent les lieux, les temps et les positions de parole. <br>
+						La constitution de 7 corpus de textes, les regroupant par ethos, est une partie intégrante de la démarche. Des fragements de ces corpus en cours d'élaboration vous seront présentés.
+					</p>
+					<p class="fragment justify">
+						Pour découvrir les grandes lignes du projet, 4 parcours thématiques vous sont proposés. Vous pouvez choisir de les parcourir dans l’ordre suggéré, ou d’accéder directement à chacun d’entre-eux, d’en quitter un pour mieux y revenir durant le temps que vous passerez au sein de cette exposition. 
+					</p>
+					<ol>
+						<li class="fragment">Qu’est-ce qu’une littérature « africaine » ? </li>
+						<li class="fragment">L’ethos comme clé de lecture</li>
+						<li class="fragment">Cartographie : lieux et récits</li>
+						<li class="fragment">L’histoire littéraire autrement : déconstruire les périodisations</li>
+					</ol>
 				</section>
+				<section data-background="radial-gradient( #ffffff,#B0D1D4 )">
+					<section>
+					<h2>1. Qu’est-ce qu’une littérature « africaine » ?</h2>
+					 <div>
+    <p>« Qu’est-ce que la littérature africaine ? » Le débat qui s’ensuivit fut animé. Fallait-il appeler littérature africaine la littérature qui parlait de l’Afrique et de la vie en Afrique ? La littérature qu’écrivaient les Africains ? Que fallait-il faire d’un non-Africain qui écrivait sur l’Afrique ? Écrivait-il de la littérature africaine ? Qu’advenait-il si un écrivain africain décidait de situer son intrigue au Groenland ? Était-ce de la littérature africaine ? Ou était- ce la langue qui devait servir de critère ? Qu’en était-il alors de l’arabe, parlé par certains Africains ? Que faire du français et de l’anglais, devenus à leur façon des langues d’Afrique ? Que se passait-il si un Européen décidait d’écrire sur l’Europe en langue africaine ? Qu’advenait-il si... et si... et si... et si... ?</p>
+	<p>Ngugi Wa Thiong’o, <i>Décoloniser l’esprit</i>, traduit et préfacé par S. Prudhomme, Paris, La Fabrique, 2011 [1986] </p>  
+					 </div>
+					 <br>
+					 <a href="#/2-litterature">
+						<img src="data/images/down-arrow.png" alt="down arrow" width="100">
+					 </a>
+					</section>
+					<section id="2-litterature">
+						<p>L’expression <i>littérature africaine</i> est à la fois familière et problématique. Elle semble désigner un ensemble stable d’œuvres produites par des auteur·es du continent africain.</p> 
+						<p class="fragment">Pourtant, cette catégorie soulève de nombreuses questions : à partir de quels critères cette appartenance est-elle définie ? Par la naissance ? La nationalité ? Le lieu de publication ? La langue ? L’expérience diasporique ?</p>
+					</section>
+					<section>
+						<p>La formule masque une grande hétérogénéité linguistique, géographique, historique et esthétique. Elle est aussi le produit d’un regard postcolonial, souvent européen, qui tend à essentialiser les œuvres en les rapportant à une supposée africanité. Or les auteur·es classé·es comme « africain·es » sont marqué·es par des références multiples, s’inscrivent dans des traditions littéraires transnationales et ne se laissent réduire à des étiquettes nationales ou continentales.</p>
+						<p class="fragment">
+						Dans le cadre de ce projet, une fiction dont la « voix » (personnage ou narrateur-énonciateur) peut être associée à une présence africaine est retenu pour cette histoire littéraire. 
+						</p>
+					</section>
+					<section>
+  <h2>Map</h2>
+  <div style="display: flex; gap: 20px; height: 90vh; align-items: flex-start;">
+    
+    <div style="display: flex; flex-direction: column; gap: 10px; width: 20%;">
+      <iframe src="visualisations/map-controls.html" style="width: 100%; height: 200px; border: none;"></iframe>
+
+      <div class="ethos-legend">
+        
+        <div class="ethos-item"><span class="color-box" style="background-color: #E2B4BD;"></span>Ethos cosmopolite</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #93A8AC;"></span>Ethos d'opposition</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #FFD447;"></span>Ethos de genre</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #3E5622;"></span>Ethos de la migrance</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #DB7F67;"></span>Ethos de la présence</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #700353;"></span>Ethos environnemental</div>
+        <div class="ethos-item"><span class="color-box" style="background-color: #345995;"></span>Ethos mémoriel</div>
+      </div>
+    </div>
+
+    <iframe src="visualisations/map.html" style="width: 80%; height: 100%; border: none;"></iframe>
+
+  </div>
+</section>
+					
+				</section>
+				<section>
+					<section>
+						<h2>2. L’ethos comme clé de lecture</h2>
+						<p class="justify">L’ethos, c’est la manière dont un texte donne à sentir une présence humaine : une voix, une posture, une attitude face au monde.</p>
+						<p class="fragment">Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix narrative dominante qui parle dans le texte. C’est une manière d’approcher la littérature à partir de la voix transmise par le texte, plutôt que seulement ce qu’elle raconte, où et quand elle a été produite, et dans quel contexte. </p>
+					 <a href="#/2-ethos">
+						<img src="data/images/down-arrow.png" alt="down arrow" width="100">
+					 </a>
+					</section>
+					<section id="2-ethos">
+						<p class="justify">Ce diagramme présente la répartition des textes du corpus par ethos. Glissez vers les bas pour accédez à des decriptifs des ethos, et à des exemples de livres.</p>
+					<iframe src="visualisations/radial-cluster.html" width="100%" height="650" style="border:none;"></iframe>
+					</section>
+
+					<section>
+						<h3> Ethos d'opposition</h3>
+						<p>L'ethos d'opposition se caractérise par une voix narrative qui exprime une contestation ou une critique. Elle remet en question les contextes politiques et sociaux, collextifs ou individuels, à travers la perspective narrative et les points de vue adoptés. 
+							Cet enjeu se dévoile autant par la thématique que l'expression même du récit et des discours.</p>
+						<div class="r-stack">
+									
+							<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+									Astro conte son quotidien en banlieue parisienne, en simultané, et reviens sur la vie du groupe, des copains, les imagine et se remémore les interpellations : la journée est envisagée par scènes successives. Sur un scooter, fuite de Bak et Samy, coups de feu et mort. Agir- réagir : « Bientôt tout aura changé » (110). Charge explosive qui matérialise la rage intérieure, l’impuissance et le refus d’accepter.
+									</p>
+								</div>
+								<div class="fiche-image">
+									<img src="https://m.media-amazon.com/images/I/610PyVbmAFL.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+
+							<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+Après la perte de ses fétiches, il s'agit pour Koyaga de conserver le pouvoir politique : sa confrérie des chasseurs organise le donsomana, des veillées pour "tout dire". Le récit rétrospectif porté par le griot-sora Bingo et son répondeur-cordouan Tiécoura met à nu la violence du pouvoir militaire et dictatorial. La confrontation à ces récits de violence crée, pour le lecteur, la dénonciation générale de ces pouvoirs portés par des puissances extérieures, en pleine Guerre froide.									</p>
+								</div>
+
+								<div class="fiche-image">
+									<img src="https://m.media-amazon.com/images/I/71-ud5IlhZL._AC_UF1000,1000_QL80_.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+
+									<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour une cérémonie officielle de restitution de « la dent » de Lumumba, leader indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux discours de réparation. Le « Je » – président, femme, fils, soldat, guérisseur, ancêtre, paysan du Congo, combattant du Congo libre, président de l’Union africaine, historien de l’âge, tigritude du Congo – en veut à mort au représentant d’une « criminelle dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort vaudra.
+									</p>
+								</div>
+
+								<div class="fiche-image">
+									<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+								</div>
+					</section>
+					<section>
+						<h3> Ethos mémoriel</h3>
+						<p>La voix narrative dominante met en avant une mémoire collective ou personnelle liée à l'histoire. Elle peut raconter l'expérience d'une communauté entière ou le destin d'une seule personne ou famille. Cette voix cherche à redonner leur place aux civilisations africaines et aux individus effacés par la colonisation dans l'histoire mondiale. Le récit crée des liens avec le présent, au moment où l'histoire est racontée ou publiée.</p>
+						<div class="r-stack">
+
+							<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+La narratrice raconte la légende de la reine Pokou, figure fondatrice de Côte d’Ivoire.
+									</p>
+								</div>
+								<div class="fiche-image">
+									<img src="https://www.actes-sud.fr/sites/default/files/couv_jpg/9782330080525.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+
+							<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+Le récit est composé de plusieurs récits-témoignages sur le génocide au Rwanda, que ce soit des victimes ou des bourreaux, et propose ainsi un travail de mémoire. Cette structure énonciative vise également à essayer de comprendre, sans toutefois pouvoir expliquer cet événement terrible.
+								</div>
+
+								<div class="fiche-image">
+									<img src="https://m.media-amazon.com/images/I/A1Wh3rrrmuL._AC_UF1000,1000_QL80_.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+
+									<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+								<div class="fiche-text">
+									<p class="fiche-description small">
+Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour une cérémonie officielle de restitution de « la dent » de Lumumba, leader indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux discours de réparation. Le « Je » – président, femme, fils, soldat, guérisseur, ancêtre, paysan du Congo, combattant du Congo libre, président de l’Union africaine, historien de l’âge, tigritude du Congo – en veut à mort au représentant d’une « criminelle dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort vaudra.
+									</p>
+								</div>
+
+								<div class="fiche-image">
+									<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg" width="200px" alt="Illustration" />
+								</div>
+								</div>
+						</div>
+					</section>
+				</section>
+				
 
 				<section>
 				<h2>Timeline</h2>
@@ -85,6 +227,49 @@
 					<iframe src="visualisations/radial-cluster.html" width="100%" height="650" style="border:none;"></iframe>
 				</section>
 
+				<section>
+
+
+					<div class="r-stack">
+						<div class="fragment">
+							<p>kjdsfodbf</p>
+					<img
+						src="https://picsum.photos/450/300"
+						width="450"
+						height="300"
+					/>
+					</div>
+						<div class="fragment">
+							<p>kjdsfodbf</p>
+					<img
+						src="https://picsum.photos/450/300"
+						width="450"
+						height="300"
+					/>
+					</div>
+						<div class="fragment">
+							<p>kjdsfodbf</p>
+					<img
+						src="https://picsum.photos/500/300"
+						width="450"
+						height="300"
+					/>
+					</div>
+						<div class="fragment">
+							<p>kjdsfodbf</p>
+					<img
+						src="https://picsum.photos/600/300"
+						width="450"
+						height="300"
+					/>
+					</div>
+					
+					
+					</div>
+				</section>
+
+				
+
 	
 				<!-- Example of nested vertical slides -->
 				<section>
@@ -94,7 +279,7 @@
 						<p>Use the <em>Space</em> key to navigate through all slides.</p>
 						<br>
 						<a href="#/2/1" class="navigate-down">
-							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://cdn-icons-png.flaticon.com/128/10728/10728680.png" alt="Down arrow">
 						</a>
 					</section>
 					<section>
@@ -119,7 +304,7 @@
 					</p>
 				</section>
 
-				<section data-visibility="hidden">
+				<section >
 					<h2>Hidden Slides</h2>
 					<p>
 						This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
@@ -449,15 +634,7 @@
 					</p>
 				</section>
 
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://revealjs.com/speaker-view/">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+			
 
 				<section>
 					<h2>Export to PDF</h2>
@@ -486,23 +663,9 @@ Reveal.on( 'customevent', function() {
 					</code></pre>
 				</section>
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
+	
 
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://revealjs.com/api/">Extensive JavaScript API</a></li>
-						<li><a href="https://revealjs.com/auto-slide/">Auto-progression</a></li>
-						<li><a href="https://revealjs.com/backgrounds/#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://revealjs.com/keyboard/">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
+
 
 				<section style="text-align: left;">
 					<h1>THE END</h1>

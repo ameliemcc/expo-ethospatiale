@@ -21,14 +21,14 @@ $lightgreen:  #BBC9BF;
 $cosmopolite : #E2B4BD;
 $opposition: #93A8AC;
 $genre: #FFD447;
-$envrionnemental: #700353;
+$environnemental: #700353;
 $migrance: #3E5622;
 $presence: #DB7F67;
 $memoriel: #345995;
 
 
 // Override theme settings (see ../template/settings.scss)
-$mainFontSize: 42px;
+$mainFontSize: 18px;
 $mainFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
 $headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
 
@@ -44,9 +44,68 @@ $heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b
 $overlayElementBgColor: 0, 0, 0;
 $overlayElementFgColor: 240, 240, 240;
 
+p {
+  color: $brown;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 40px;
+  text-transform: none;
+}
+
+h2 {
+  font-size: 30px;
+  text-transform: none;
+}
+
+li {
+    font-size: 18px;
+    color: $green;
+}
+.justify{
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+blockquote{
+	font-size: 18px;
+}
+
+.small {
+  font-size: 15px;
+}
+
+.fiche {
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  background-color: #f5e4c3; 
+  padding: 10px;
+  height: fit-content;
+  align-items: start;
+}
+
+.fiche-text {
+  font-size: 13px;  
+  display: flex;
+  flex-direction: column;
+}
+
+.fiche-description {
+  margin: 0;
+}
+
+.fiche-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 // Background generator
 @mixin bodyBackground() {
-	@include radial-gradient( $lightblue, rgba(255,255,255,1) );
+	@include radial-gradient( $lightpurple, #ffffff  );
 }
 
 // Change text colors against dark slide backgrounds
