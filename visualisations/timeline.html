@@ -7,7 +7,6 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
       padding: 0;
     }
@@ -15,7 +14,7 @@
     .axis path,
     .axis line {
       fill: none;
-      stroke: #333;
+      stroke: #315659;
       shape-rendering: crispEdges;
     }
 
@@ -25,14 +24,14 @@
     }
 
     .book {
-      font-size: 10px;
-      fill: #007bff;
+      font-size: 13px;
+      fill: #7B6C73;
       text-anchor: middle;
       pointer-events: none;
     }
 
     .dot {
-      fill: #333;
+      fill: #315659;
     }
 
     .leader {
@@ -45,40 +44,24 @@
       overflow: visible;
     }
 
-    .scroll-container {
-      overflow-x: auto;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-    }
+ .scroll-container {
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
   </style>
 </head>
 <body>
   <div class="scroll-container">
-    <svg width="5000" height="400"></svg>
-  </div>
+    <svg width="5000" height="700"></svg>
+    </div>
 
   <script>
-    
-    const rawData = `
-1979;La Vie et demie
-1979;Les Crapauds-brousse
-1998;En attendant le vote des bêtes sauvages
-1956;Le pauvre Christ de Bomba
-1982;Le Pleurer-Rire
-2014;Terre ceinte
-2008;Mathématiques congolaises
-2009;Another book near 2008
-1960;Les Bouts de bois de Dieu : Banty Mam Yall
-1961;La Vie et demie
-1962;Les Crapauds-brousse
-1963;En attendant le vote des bêtes sauvages
-1964;Le pauvre Christ de Bomba
-1965;Le Pleurer-Rire
-1966;Terre ceinte
-1967;Mathématiques congolaises
-2009;Another book near 2008
-1960;Les Bouts de bois de Dieu : Banty Mam Yall
-`;
+
+
+
 
 d3.text("../data/dates_titres.csv").then(csvText => {
   const data = csvText.trim().split("\n").map(line => {
@@ -100,7 +83,7 @@ d3.text("../data/dates_titres.csv").then(csvText => {
       .domain([1940, 2025])
       .range([margin.left, width - margin.right]);
 
-    const axisY = height / 2;
+const axisY = 590; // near the bottom
 
     svg.append("g")
       .attr("transform", `translate(0,${axisY})`)

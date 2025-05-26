@@ -55,13 +55,11 @@
     }
 
  function updateMarkers(filtering, activeDecade) {
-  // Remember which layers are visible before clearing
   const visibleEthos = new Set();
   for (const [ethos, layer] of Object.entries(ethosLayers)) {
     if (map.hasLayer(layer)) visibleEthos.add(ethos);
   }
 
-  // Clear and remove all layers
   for (const layer of Object.values(ethosLayers)) {
     layer.clearLayers();
     map.removeLayer(layer);
@@ -101,7 +99,7 @@
     ethosLayers[ethos].addLayer(marker);
   });
 
-  // Add back only layers that were previously visible and have markers
+  // Add back layers that were previously visible 
   for (const [ethos, layer] of Object.entries(ethosLayers)) {
     if (layer.getLayers().length > 0) {
       if (visibleEthos.has(ethos)) {
