@@ -48,7 +48,7 @@
     localStorage.setItem("filtering", filtering);
     localStorage.setItem("decade", decade);
 
-    const mapFrame = parent.document.querySelector('iframe[src*="map-copie.html"]');
+    const mapFrame = parent.document.querySelector('iframe[src*="map.html"]');
     if (mapFrame) {
       mapFrame.contentWindow.postMessage({ filtering, decade }, "*");
     }
