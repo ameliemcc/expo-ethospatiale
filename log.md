@@ -2,7 +2,34 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-93 heures
+Total : 123 heures
+
+## 28 mai 
+*9 heures*
+
+- rdv ChL
+- tuto shepherd 
+- intégration shepherd
+- écriture textes
+
+## 27 mai 
+*8 heures*
+
+- visualisation voix
+- visualisation sunburst
+
+## 26 mai
+*4 heures*
+
+- RDV IP
+- Planification tâches restantes
+
+## 25 mai
+*9 heures*
+
+- carte
+- texte présentation
+- intégration livres ethos
 
 ## 24 mai
 *8 heures*

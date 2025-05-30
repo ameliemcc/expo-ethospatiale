@@ -4,12 +4,44 @@
 <head>
   <meta charset="UTF-8" />
   <title>Radial tree</title>
+  <link rel="stylesheet" href="../node_modules/shepherd.js/dist/css/shepherd.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
 </head>
 
 <body>
+
+  <h1 class="titleClasse">TItrle </h1>
   <svg id="radial-tree" width="900"></svg>
+  <p class="first">asfhcéohcaoméehfsci</p>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@8.6.0/dist/css/shepherd.css" />
+  <script src="https://cdn.jsdelivr.net/npm/shepherd.js@8.6.0/dist/js/shepherd.min.js"></script>
+
+  <script>
+    const tour = new Shepherd.Tour({
+      defaults: {
+        classes: 'shepherd'
+      }
+    });
+
+    tour.addStep({
+      id: 'example-step',
+      text: 'This step is attached to the bottom of the <code>.example-css-selector</code> element.',
+      attachTo: {
+        element: '.titleClasse',
+        on: 'bottom'
+      },
+      buttons: [
+        {
+          text: 'Next',
+          action: tour.next
+        }
+      ]
+    });
+    tour.start()
+  </script>
+
   <script>
 
 
@@ -118,10 +150,10 @@
         .clone(true).lower()
         .attr("stroke", "white");
     });
+    tour.start()
 
   </script>
 
 </body>
 
 </html>
-

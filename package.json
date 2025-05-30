@@ -110,6 +110,8 @@
     "d3kit": "^3.2.0",
     "d3kit-timeline": "^2.0.1",
     "jquery-csv": "^1.0.40",
-    "labella": "^1.1.4"
+    "labella": "^1.1.4",
+    "popper.js": "^1.16.1",
+    "shepherd.js": "^14.5.0"
   }
 }

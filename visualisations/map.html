@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Carte</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="../dist/theme/shepherd-style.css">
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-    #map { width: 100%; height: 100%; }
+
+html, body, #map {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
   </style>
 </head>
+
 <body>
   <div id="map"></div>
 
@@ -17,11 +25,54 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
+  <script type="module">
+    import Shepherd from 'https://cdn.jsdelivr.net/npm/shepherd.js@13.0.0/dist/esm/shepherd.mjs';
+
+    const tour = new Shepherd.Tour({
+      useModalOverlay: true,
+
+    });
+
+    tour.addStep({
+      id: 'step1-map',
+      text: 'Cliquer ici pour slélectionner les ethos à afficher.',
+      attachTo: {
+        element: '.leaflet-control-layers.leaflet-control',
+        on: 'bottom'
+      },
+      buttons: [
+        {
+          text: 'OK',
+          action: tour.next
+        }
+      ]
+    });
+
+        tour.addStep({
+      id: 'step2-map',
+      text: 'Cliquer sur un point de la carte pour afficher les livres représentés.',
+      attachTo: {
+        element: '.map',
+        on: 'bottom'
+      },
+      buttons: [
+        {
+          text: 'OK',
+          action: tour.next
+        }
+      ]
+    });
+
+    tour.start();
+  </script>
+
   <script>
-    const map = L.map('map').setView([10, 0], 2);
+    const map = L.map('map').setView([20, -5], 2);
     const osm = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       maxZoom: 8, minZoom: 2, attribution: '© OpenStreetMap © CARTO'
     }).addTo(map);
+
+
 
     const markerData = [];
     const ethosLayers = {};
@@ -37,79 +88,79 @@
     };
 
 
-    
+
     function colorLayerControlLabels() {
-  const labels = document.querySelectorAll('.leaflet-control-layers-overlays label');
-  labels.forEach(label => {
-    const labelText = label.textContent.trim();
-    const color = ethosColors[labelText];
-    if (color) {
-      label.style.color = color;
+      const labels = document.querySelectorAll('.leaflet-control-layers-overlays label');
+      labels.forEach(label => {
+        const labelText = label.textContent.trim();
+        const color = ethosColors[labelText];
+        if (color) {
+          label.style.color = color;
+        }
+      });
     }
-  });
-}
     const layerControl = L.control.layers(null, overlays).addTo(map);
 
     function getDecade(year) {
       return Math.floor(year / 10) * 10;
     }
 
- function updateMarkers(filtering, activeDecade) {
-  const visibleEthos = new Set();
-  for (const [ethos, layer] of Object.entries(ethosLayers)) {
-    if (map.hasLayer(layer)) visibleEthos.add(ethos);
-  }
-
-  for (const layer of Object.values(ethosLayers)) {
-    layer.clearLayers();
-    map.removeLayer(layer);
-  }
-
-  const locationMap = new Map();
-
-  markerData.forEach(book => {
-    if (filtering && getDecade(book.year) !== activeDecade) return;
-    const key = `${book.lat},${book.lng}`;
-    if (!locationMap.has(key)) locationMap.set(key, []);
-    locationMap.get(key).push(book);
-  });
-
-  locationMap.forEach((books, key) => {
-    const [lat, lng] = key.split(',').map(Number);
-    const ethos = books[0].ethos;
-    const color = ethosColors[ethos] || 'gray';
-    const count = books.length;
-    const radius = 6 + count * 2;
-
-    const marker = L.circleMarker([lat, lng], {
-      radius,
-      color,
-      fillColor: color,
-      fillOpacity: 0.8,
-      weight: 1
-    }).bindPopup(books.map(b => `<b>${b.title}</b> (${b.year})`).join('<br>'));
-
-    if (!ethosLayers[ethos]) {
-      ethosLayers[ethos] = L.layerGroup();
-      overlays[ethos] = ethosLayers[ethos];
-      layerControl.addOverlay(ethosLayers[ethos], ethos);
-      setTimeout(colorLayerControlLabels, 0);
-    }
-
-    ethosLayers[ethos].addLayer(marker);
-  });
-
-  // Add back layers that were previously visible 
-  for (const [ethos, layer] of Object.entries(ethosLayers)) {
-    if (layer.getLayers().length > 0) {
-      if (visibleEthos.has(ethos)) {
-        layer.addTo(map);
+    function updateMarkers(filtering, activeDecade) {
+      const visibleEthos = new Set();
+      for (const [ethos, layer] of Object.entries(ethosLayers)) {
+        if (map.hasLayer(layer)) visibleEthos.add(ethos);
       }
-    } else {
-      map.removeLayer(layer);
+
+      for (const layer of Object.values(ethosLayers)) {
+        layer.clearLayers();
+        map.removeLayer(layer);
+      }
+
+      const locationMap = new Map();
+
+      markerData.forEach(book => {
+        if (filtering && getDecade(book.year) !== activeDecade) return;
+        const key = `${book.lat},${book.lng}`;
+        if (!locationMap.has(key)) locationMap.set(key, []);
+        locationMap.get(key).push(book);
+      });
+
+      locationMap.forEach((books, key) => {
+        const [lat, lng] = key.split(',').map(Number);
+        const ethos = books[0].ethos;
+        const color = ethosColors[ethos] || 'gray';
+        const count = books.length;
+        const radius = 6 + count * 2;
+
+        const marker = L.circleMarker([lat, lng], {
+          radius,
+          color,
+          fillColor: color,
+          fillOpacity: 0.8,
+          weight: 1
+        }).bindPopup(books.map(b => `<b>${b.title}</b> (${b.year})`).join('<br>'));
+
+        if (!ethosLayers[ethos]) {
+          ethosLayers[ethos] = L.layerGroup();
+          overlays[ethos] = ethosLayers[ethos];
+          layerControl.addOverlay(ethosLayers[ethos], ethos);
+          setTimeout(colorLayerControlLabels, 0);
+        }
+
+        ethosLayers[ethos].addLayer(marker);
+      });
+
+      // Add back layers that were previously visible 
+      for (const [ethos, layer] of Object.entries(ethosLayers)) {
+        if (layer.getLayers().length > 0) {
+          if (visibleEthos.has(ethos)) {
+            layer.addTo(map);
+          }
+        } else {
+          map.removeLayer(layer);
+        }
+      }
     }
-  }
-}
 
 
 
@@ -117,7 +168,7 @@
       download: true,
       delimiter: ";",
       skipEmptyLines: true,
-      complete: function(results) {
+      complete: function (results) {
         results.data.forEach(row => {
           const [title, ethos, yearStr, latStr, lngStr] = row.map(f => f.trim());
           const year = parseInt(yearStr);
@@ -126,7 +177,7 @@
           if (!title || !ethos || isNaN(year) || isNaN(lat) || isNaN(lng)) return;
           markerData.push({ title, ethos, year, lat, lng });
         });
-       updateMarkers(true, 2020, true); // third arg: initialLoad = true
+        updateMarkers(true, 2020, true); // third arg: initialLoad = true
       }
     });
 
@@ -137,4 +188,5 @@
     });
   </script>
 </body>
+
 </html>
