@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bouncing Circles</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #1e1e1e;
+    }
+
+    .circle {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      color: white;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: sans-serif;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const colors = {
+    "cosmopolite": "#E2B4BD",
+    "d'opposition": "#93A8AC",
+    "de genre": "#B88D00",
+    "environnemental": "#c08cb2",
+    "de la migrance": "#9ab180",
+    "de la présence": "#DB7F67",
+    "mémoriel": "#345995"
+  };
+
+  const circles = [];
+  const screenW = window.innerWidth;
+  const screenH = window.innerHeight;
+
+  for (let label in colors) {
+    const div = document.createElement("div");
+    div.className = "circle";
+    div.textContent = label;
+    div.style.backgroundColor = colors[label];
+
+    const circle = {
+      el: div,
+      x: Math.random() * (screenW - 80),
+      y: Math.random() * (screenH - 80),
+      dx: (Math.random() - 0.5) * 4,
+      dy: (Math.random() - 0.5) * 4,
+    };
+
+    document.body.appendChild(div);
+    circles.push(circle);
+  }
+
+  function animate() {
+    for (let c of circles) {
+      c.x += c.dx;
+      c.y += c.dy;
+
+      // Bounce off edges
+      if (c.x <= 0 || c.x >= screenW - 80) c.dx *= -1;
+      if (c.y <= 0 || c.y >= screenH - 80) c.dy *= -1;
+
+      c.el.style.transform = `translate(${c.x}px, ${c.y}px)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+</html>

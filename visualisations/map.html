@@ -8,13 +8,28 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="../dist/theme/shepherd-style.css">
   <style>
+    html,
+    body,
+    #map {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
 
-html, body, #map {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
+
+    @font-face {
+      font-family: "turnip-normal";
+      src: url("../dist/theme/fonts/turnip/Turnip-Book.otf");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .leaflet-control-layers-overlays {
+      font-family: "turnip-normal";
+      font-size: 15px;
+    }
   </style>
 </head>
 
@@ -35,7 +50,7 @@ html, body, #map {
 
     tour.addStep({
       id: 'step1-map',
-      text: 'Cliquer ici pour slélectionner les ethos à afficher.',
+      text: 'Cliquer ici pour sélectionner les ethos à afficher.',
       attachTo: {
         element: '.leaflet-control-layers.leaflet-control',
         on: 'bottom'
@@ -48,7 +63,7 @@ html, body, #map {
       ]
     });
 
-        tour.addStep({
+    tour.addStep({
       id: 'step2-map',
       text: 'Cliquer sur un point de la carte pour afficher les livres représentés.',
       attachTo: {
@@ -113,8 +128,8 @@ html, body, #map {
 
       for (const layer of Object.values(ethosLayers)) {
         layer.clearLayers();
-        map.removeLayer(layer);
       }
+
 
       const locationMap = new Map();
 
@@ -150,16 +165,7 @@ html, body, #map {
         ethosLayers[ethos].addLayer(marker);
       });
 
-      // Add back layers that were previously visible 
-      for (const [ethos, layer] of Object.entries(ethosLayers)) {
-        if (layer.getLayers().length > 0) {
-          if (visibleEthos.has(ethos)) {
-            layer.addTo(map);
-          }
-        } else {
-          map.removeLayer(layer);
-        }
-      }
+
     }
 
 
@@ -181,7 +187,6 @@ html, body, #map {
       }
     });
 
-    // Réception des messages depuis l'iframe des contrôles
     window.addEventListener("message", (event) => {
       const { filtering, decade } = event.data;
       updateMarkers(filtering, decade);

@@ -14,400 +14,499 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <link rel="stylesheet" href="dist/reset.css">
-<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
 	<link rel="stylesheet" href="dist/theme/custom.css" id="theme">
 
 	<!-- Theme used for syntax highlighting of code -->
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 	<link rel="stylesheet" href="dist/theme/shepherd-style.css">
 </head>
+
 <style>
-
-	.legend {
-
-		box-sizing: border-box;
-		text-align: left;
-		padding: 10px;
-		height: 100%;
+	.ethos-circles {
 		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		width: 17vw;
+		justify-content: center;
+		gap: 12px;
+		margin: 20px auto;
+		flex-wrap: wrap;
 	}
 
-	.ethos-item {
+	.circle-static {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		color: #eee9ec;
+		font-size: 14px;
 		display: flex;
 		align-items: center;
-		margin-top: 5px;
+		justify-content: center;
+		text-align: center;
+		padding: 10px;
+		font-family: "turnip";
 	}
 
-	.main-map {
-		height: 100%;
-		flex-grow: 1;
-		box-sizing: border-box;
-		margin-right: 10px;
-
+	#ol-wrapper {
+		position: relative;
+		padding: 200px;
 	}
 
+	#circle-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+		z-index: 0;
+	}
 
-	.color-box {
-		width: 14px;
-		height: 14px;
-		display: inline-block;
-		margin-right: 8px;
-		border: 1px solid #333;
+	.circle {
+		position: absolute;
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		font-size: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		pointer-events: none;
 	}
 </style>
 
 <body>
 
 	<div class="reveal">
-		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
+		<!-- Intro -->
 
 			<section>
 				<h1>Configuration <b>Etho</b>Spatiale </h1>
 				<h2>Pour une relecture critique de la littérature subsaharienne de langue française</h2>
 			</section>
-			<section>
-				<p class="justify">
-					Cette exposition en ligne s’inscrit dans le prolongement du projet de recherche FNS <i>Configuration
+			<section data-auto-animate>
+				<p class="justify" id="intro-1">
+					Cette exposition en ligne s’inscrit dans le prolongement du projet de recherche FNS <i
+						class="italic">Configuration
 						EthoSpatiale</i>, qui propose une relecture critique de la littérature subsaharienne de langue
-					française à travers une approche novatrice, fondée sur l’articulation entre <b>ethos énonciatif</b>
+					française à travers une approche novatrice, fondée sur l’articulation entre ethos énonciatif
 					et <b>espaces géographiques, politiques et symboliques</b>. Ce projet a pour but de réévaluer les
 					découpages habituels en périodes, auteurs ou mouvements, en valorisant à la place les configurations
 					discursives dominantes qui traversent les textes.</p>
 
 			</section>
-			<section>
+			<section data-auto-animate>
+				<p class="justify" id="intro-1">
+					Cette exposition en ligne s’inscrit dans le prolongement du projet de recherche FNS <i
+						class="italic">Configuration
+						EthoSpatiale</i>, qui propose une relecture critique de la littérature subsaharienne de langue
+					française à travers une approche novatrice, fondée sur l’articulation entre ethos énonciatif
+					et <b>espaces géographiques, politiques et symboliques</b>. Ce projet a pour but de réévaluer les
+					découpages habituels en périodes, auteurs ou mouvements, en valorisant à la place les configurations
+					discursives dominantes qui traversent les textes.</p>
 				<p class="justify">
 					Cette perspective permet de repenser l’histoire littéraire en identifiant des <i>ethos</i> qui
 					structurent les œuvres de manière transversale. Ces catégories sont issues d’une lecture attentive
 					des corpus, attentive à la manière dont les auteurs investissent les lieux, les temps et les
 					positions de parole. <br>
-					La constitution de 7 corpus de textes, les regroupant par ethos, est une partie intégrante de la
-					démarche. Des fragements de ces corpus en cours d'élaboration vous seront présentés.
+
 				</p>
-				<p class="fragment justify">
-					Pour découvrir les grandes lignes du projet, 3 parcours thématiques vous sont proposés. Vous pouvez
+			</section>
+
+			<section data-auto-animate>
+				<br>
+				<p class="justify">La constitution de 7 corpus de textes, les regroupant par <b>ethos</b>, est une
+					partie
+					intégrante de la
+					démarche. Des fragments de ces corpus en cours d'élaboration vous seront présentés.
+				</p>
+				<div class="ethos-circles fragment">
+					<div class="circle-static" style="background-color: #E2B4BD;">Ethos cosmopolite</div>
+					<div class="circle-static" style="background-color: #93A8AC;">Ethos <br>d'opposition</div>
+					<div class="circle-static" style="background-color: #B88D00;">Ethos <br>de genre</div>
+					<div class="circle-static" style="background-color: #c08cb2;">Ethos <br>environnemental</div>
+					<div class="circle-static" style="background-color: #9ab180;">Ethos <br>de la migrance</div>
+					<div class="circle-static" style="background-color: #DB7F67;">Ethos <br>de la présence</div>
+					<div class="circle-static" style="background-color: #345995;">Ethos <br>mémoriel</div>
+				</div>
+				<p class="fragment justify " id="plan">
+					Pour découvrir les grandes lignes du projet, <b>3 parcours thématiques</b> vous sont proposés. Vous
+					pouvez
 					choisir de les parcourir dans l’ordre suggéré, ou d’accéder directement à chacun d’entre-eux, d’en
-					quitter un pour mieux y revenir durant le temps que vous passerez au sein de cette exposition.
-				</p>
-			</section>
-			<section>
-				<ol>
-					<a href="#/1-ethos">
-						<li class="fragment">L’ethos comme clé de lecture <br>
-							<p>L'ethos est une notion centrale à l'appréhension du corpus. Ce parcours vous propose de
-								découvrir l'application de cette notion.</p>
-						</li>
-					</a>
-					<a href="#/1-litterature">
-
-						<li class="fragment">Qu’est-ce qu’une littérature « africaine » ? </li>
-						<p>La catégorisation de textes comme "africains" pose plus de questions qu'il ne pourrait
-							sembler à premier abord. Ce parcours offre des clés de compréhension pour une appréhension
-							située des textes du corpus.</p>
-					</a>
-					<a href="#/1-histoire">
-						<li class="fragment">L’histoire littéraire autrement : déconstruire les périodisations</li>
-						<p></p>
-					</a>
-				</ol>
+					quitter un pour mieux y revenir durant le temps que vous passerez au sein de cette exposition. </p>
 			</section>
 
+			<section id="animated-ethos-slide" data-auto-animate>
+				<div id="ol-wrapper">
+					<div id="circle-container"></div>
 
-			<section data-background="radial-gradient( #ffffff,#B0D1D4 )">
-				<section id="1-litterature">
-					<h2>1. Qu’est-ce qu’une littérature « africaine » ?</h2>
-					<div>
-						<p class="italic">« Qu’est-ce que la littérature africaine ? » Le débat qui s’ensuivit fut animé. Fallait-il
-							appeler littérature africaine la littérature qui parlait de l’Afrique et de la vie en
-							Afrique ? La littérature qu’écrivaient les Africains ? Que fallait-il faire d’un
-							non-Africain qui écrivait sur l’Afrique ? Écrivait-il de la littérature africaine ?
-							Qu’advenait-il si un écrivain africain décidait de situer son intrigue au Groenland ?
-							Était-ce de la littérature africaine ? Ou était- ce la langue qui devait servir de critère ?
-							Qu’en était-il alors de l’arabe, parlé par certains Africains ? Que faire du français et de
-							l’anglais, devenus à leur façon des langues d’Afrique ? Que se passait-il si un Européen
-							décidait d’écrire sur l’Europe en langue africaine ? Qu’advenait-il si... et si... et si...
-							et si... ?</p>
-						<p>Ngugi Wa Thiong’o, <i class="italic">Décoloniser l’esprit</i>, traduit et préfacé par S. Prudhomme, Paris,
-							La Fabrique, 2011 [1986] </p>
-					</div>
-					<br>
-					<a href="#/2-litterature">
-						<img src="data/images/down-arrow.png" alt="down arrow" width="100">
-					</a>
-				</section>
-				<section id="2-litterature">
-					<p>L’expression <i>littérature africaine</i> est à la fois familière et problématique. Elle semble
-						désigner un ensemble stable d’œuvres produites par des auteur·es du continent africain.</p>
-					<p class="fragment">Pourtant, cette catégorie soulève de nombreuses questions : à partir de quels
-						critères cette appartenance est-elle définie ? Par la naissance ? La nationalité ? Le lieu de
-						publication ? La langue ? L’expérience diasporique ?</p>
-				</section>
-				<section>
-					<p>La formule masque une grande hétérogénéité linguistique, géographique, historique et esthétique.
-						Elle est aussi le produit d’un regard postcolonial, souvent européen, qui tend à essentialiser
-						les œuvres en les rapportant à une supposée africanité. Or les auteur·es classé·es comme «
-						africain·es » sont marqué·es par des références multiples, s’inscrivent dans des traditions
-						littéraires transnationales et ne se laissent réduire à des étiquettes nationales ou
-						continentales.</p>
-					<p class="fragment">
-						Dans le cadre de ce projet, une fiction dont la « voix » (personnage ou narrateur-énonciateur)
-						peut être associée à une présence africaine est retenu pour cette histoire littéraire.
-					</p>
-				</section>
-				<section>
-					<h1>Map</h1>
-
-					<div
-						style="flex-grow: 1; display: flex; align-items: center; height: 70vh; background-color: #93A8AC; ">
-
-						<div class="legend">
-							<iframe src="visualisations/map-controls.html"
-								style="width: 100%; height: 180px; border: none;"></iframe>
-
-							<div class="turnip-normal" style="width: 100%;">
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #E2B4BD;"></span>Ethos cosmopolite</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #93A8AC;"></span>Ethos d'opposition</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #FFD447;"></span>Ethos de genre</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #3E5622;"></span>Ethos de la migrance</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #DB7F67;"></span>Ethos de la présence</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #700353;"></span>Ethos environnemental</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #345995;"></span>Ethos mémoriel</div>
-							</div>
-						</div>
-
-						<iframe src="visualisations/map.html" class="main-map"></iframe>
-
-						<script type="module">
-							import Shepherd from 'https://cdn.jsdelivr.net/npm/shepherd.js@13.0.0/dist/esm/shepherd.mjs';
-
-							const tour = new Shepherd.Tour({
-								useModalOverlay: true,
-
-							});
-
-							tour.addStep({
-								id: 'example-step1',
-								text: 'Les ethos sont représentés par des points des couleurs. ',
-								attachTo: {
-									element: '.turnip-normal',
-									on: 'bottom'
-								},
-								buttons: [
-									{
-										text: 'OK',
-										action: tour.next
-									}
-								]
-							});
-
-							tour.start();
-						</script>
-
-					</div>
-				</section>
-
+					<ol>
+						<a href="#/1-ethos" class="fragment justify">
+							<li class="turnip-normal">L’ethos comme clé de lecture <br>
+								<p>L'ethos est une notion centrale à l'appréhension du corpus. Ce parcours vous propose
+									de
+									découvrir l'application de cette notion.</p>
+							</li>
+						</a>
+						<a href="#/1-litterature" class="fragment justify">
+							<li class="turnip-normal">Qu’est-ce qu’une littérature « africaine » ?</li>
+							<p>La catégorisation de textes comme "africains" pose plus de questions qu'il ne pourrait
+								sembler à premier abord. Ce parcours offre des clés de compréhension pour une
+								appréhension
+								située des textes du corpus.</p>
+						</a>
+						<a href="#/1-histoire" class="fragment justify">
+							<li class="turnip-normal">L’histoire littéraire autrement : déconstruire les
+								périodisations</li>
+							<p>kdjhgsoudhf</p>
+						</a>
+					</ol>
+				</div>
 			</section>
+		<!-- Ethos -->
 
-<section data-background="radial-gradient( #ffffff,#c5a6b5 )">
+			<section data-background="radial-gradient( #ffffff,#c5a6b5 )">
 				<section id="1-ethos">
-					<h2>2. L’ethos comme clé de lecture</h2>
+					<h2>1. L’ethos comme clé de lecture</h2>
 					<p class="justify">L’ethos, c’est la manière dont un texte donne à sentir une présence humaine : une
 						voix, une posture, une attitude face au monde.</p>
-					<p class="fragment">Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix narrative
+					<p class="fragment justify">Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix
+						narrative
 						dominante qui parle dans le texte. C’est une manière d’approcher la littérature à partir de la
 						voix transmise par le texte, plutôt que seulement ce qu’elle raconte, où et quand elle a été
 						produite, et dans quel contexte. </p>
-					<a href="#/2-ethos">
+					<a href="#/ethos-opposition">
 						<img src="data/images/down-arrow.png" alt="down arrow" width="100">
 					</a>
 				</section>
-				<section id="2-ethos">
-					<p class="justify">Ce diagramme présente la répartition des textes du corpus par ethos. Glissez vers
-						les bas pour accédez à des decriptifs des ethos, et à des exemples de livres.</p>
-					<iframe src="visualisations/radial-cluster.html" width="100%" height="650"
-						style="border:none;"></iframe>
-				</section>
 
-				<section>
+				<section id="ethos-opposition">
+					<br><br>
 					<h3> Ethos d'opposition</h3>
 					<p>L'ethos d'opposition se caractérise par une voix narrative qui exprime une contestation ou une
 						critique. Elle remet en question les contextes politiques et sociaux, collextifs ou individuels,
 						à travers la perspective narrative et les points de vue adoptés.
 						Cet enjeu se dévoile autant par la thématique que l'expression même du récit et des discours.
 					</p>
-					<div class="r-stack">
 
-						<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									Astro conte son quotidien en banlieue parisienne, en simultané, et reviens sur la
-									vie du groupe, des copains, les imagine et se remémore les interpellations : la
-									journée est envisagée par scènes successives. Sur un scooter, fuite de Bak et Samy,
-									coups de feu et mort. Agir- réagir : « Bientôt tout aura changé » (110). Charge
-									explosive qui matérialise la rage intérieure, l’impuissance et le refus d’accepter.
-								</p>
-							</div>
-							<div class="fiche-image">
-								<img src="https://m.media-amazon.com/images/I/610PyVbmAFL.jpg" width="200px"
-									alt="Illustration" />
-							</div>
+					<div style="display: flex; gap: 20px; height: 75vh;">
+
+						<!-- Sidebar on the left -->
+						<div
+							style="flex: 0 0 200px; overflow: auto; border-right: 1px solid #ccc; padding-right: 15px;">
+							<iframe src="visualisations/sidebar.html"
+								style="width: 100%; height: 100%; border: none;"></iframe>
 						</div>
 
-						<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									Après la perte de ses fétiches, il s'agit pour Koyaga de conserver le pouvoir
-									politique : sa confrérie des chasseurs organise le donsomana, des veillées pour
-									"tout dire". Le récit rétrospectif porté par le griot-sora Bingo et son
-									répondeur-cordouan Tiécoura met à nu la violence du pouvoir militaire et
-									dictatorial. La confrontation à ces récits de violence crée, pour le lecteur, la
-									dénonciation générale de ces pouvoirs portés par des puissances extérieures, en
-									pleine Guerre froide. </p>
-							</div>
+						<!-- Main content (fiches) scrollable on right -->
+						<div style="flex: 1; overflow-y: auto; padding-left: 15px;">
+							<div class="r-stack">
+								<!-- Vos fiches ici -->
 
-							<div class="fiche-image">
-								<img src="https://m.media-amazon.com/images/I/71-ud5IlhZL._AC_UF1000,1000_QL80_.jpg"
-									width="200px" alt="Illustration" />
-							</div>
-						</div>
+								<div class="r-stack">
+			<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+				<div class="fiche-text">
+					<p class="fiche-description small">
+						Astro conte son quotidien en banlieue parisienne, en simultané, et reviens sur la
+						vie du groupe, des copains, les imagine et se remémore les interpellations : la
+						journée est envisagée par scènes successives. Sur un scooter, fuite de Bak et Samy,
+						coups de feu et mort. Agir- réagir : « Bientôt tout aura changé » (110). Charge
+						explosive qui matérialise la rage intérieure, l’impuissance et le refus d’accepter.
+					</p>
+				</div>
+				<div class="fiche-image">
+					<img src="https://m.media-amazon.com/images/I/610PyVbmAFL.jpg" width="200px" alt="Illustration" />
+				</div>
+			</div>
 
-						<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour une
-									cérémonie officielle de restitution de « la dent » de Lumumba, leader
-									indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux discours de
-									réparation. Le « Je » – président, femme, fils, soldat, guérisseur, ancêtre, paysan
-									du Congo, combattant du Congo libre, président de l’Union africaine, historien de
-									l’âge, tigritude du Congo – en veut à mort au représentant d’une « criminelle
-									dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort vaudra.
-								</p>
-							</div>
+			<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+				<div class="fiche-text">
+					<p class="fiche-description small">
+						Après la perte de ses fétiches, il s'agit pour Koyaga de conserver le pouvoir
+						politique : sa confrérie des chasseurs organise le donsomana, des veillées pour
+						"tout dire". Le récit rétrospectif porté par le griot-sora Bingo et son
+						répondeur-cordouan Tiécoura met à nu la violence du pouvoir militaire et
+						dictatorial. La confrontation à ces récits de violence crée, pour le lecteur, la
+						dénonciation générale de ces pouvoirs portés par des puissances extérieures, en
+						pleine Guerre froide. </p>
+				</div>
 
-							<div class="fiche-image">
-								<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg"
-									width="200px" alt="Illustration" />
-							</div>
-						</div>
-					</div>
+				<div class="fiche-image">
+					<img src="https://m.media-amazon.com/images/I/71-ud5IlhZL._AC_UF1000,1000_QL80_.jpg" width="200px"
+						alt="Illustration" />
+				</div>
+			</div>
+
+									<div class="fiche fragment fade-right" style="background-color: #d7e5e8">
+										<div class="fiche-text">
+											<p class="fiche-description small">
+												Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour
+												une
+												cérémonie officielle de restitution de « la dent » de Lumumba, leader
+												indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux
+												discours de
+												réparation. Le « Je » – président, femme, fils, soldat, guérisseur,
+												ancêtre, paysan
+												du Congo, combattant du Congo libre, président de l’Union africaine,
+												historien de
+												l’âge, tigritude du Congo – en veut à mort au représentant d’une «
+												criminelle
+												dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort
+												vaudra.
+											</p>
+										</div>
+
+										<div class="fiche-image">
+											<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg"
+												width="200px" alt="Illustration" />
+										</div>
+									</div>
+								</div>
 				</section>
-				<section>
-					<h3> Ethos mémoriel</h3>
-					<p>La voix narrative dominante met en avant une mémoire collective ou personnelle liée à l'histoire.
-						Elle peut raconter l'expérience d'une communauté entière ou le destin d'une seule personne ou
-						famille. Cette voix cherche à redonner leur place aux civilisations africaines et aux individus
-						effacés par la colonisation dans l'histoire mondiale. Le récit crée des liens avec le présent,
-						au moment où l'histoire est racontée ou publiée.</p>
-					<div class="r-stack">
+				
 
-						<div class="fiche fragment fade-right" style="background-color: #bfd6fa">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									La narratrice raconte la légende de la reine Pokou, figure fondatrice de Côte
-									d’Ivoire.
-								</p>
-							</div>
-							<div class="fiche-image">
-								<img src="https://www.actes-sud.fr/sites/default/files/couv_jpg/9782330080525.jpg"
-									width="200px" alt="Illustration" />
-							</div>
-						</div>
+	<section id="ethos-memoriel">
+		<h3> Ethos mémoriel</h3>
+		<p>La voix narrative dominante met en avant une mémoire collective ou personnelle liée à l'histoire.
+			Elle peut raconter l'expérience d'une communauté entière ou le destin d'une seule personne ou
+			famille. Cette voix cherche à redonner leur place aux civilisations africaines et aux individus
+			effacés par la colonisation dans l'histoire mondiale. Le récit crée des liens avec le présent,
+			au moment où l'histoire est racontée ou publiée.</p>
+		<div class="r-stack">
 
-						<div class="fiche fragment fade-right" style="background-color: #bfd6fa">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									Le récit est composé de plusieurs récits-témoignages sur le génocide au Rwanda, que
-									ce soit des victimes ou des bourreaux, et propose ainsi un travail de mémoire. Cette
-									structure énonciative vise également à essayer de comprendre, sans toutefois pouvoir
-									expliquer cet événement terrible.
-							</div>
+			<div class="fiche" style="background-color: #bfd6fa">
+				<div class="fiche-text">
+					<p class="fiche-description small">
+						La narratrice raconte la légende de la reine Pokou, figure fondatrice de Côte
+						d’Ivoire.
+					</p>
+				</div>
+				<div class="fiche-image">
+					<img src="https://www.actes-sud.fr/sites/default/files/couv_jpg/9782330080525.jpg" width="200px"
+						alt="Illustration" />
+				</div>
+			</div>
 
-							<div class="fiche-image">
-								<img src="https://m.media-amazon.com/images/I/A1Wh3rrrmuL._AC_UF1000,1000_QL80_.jpg"
-									width="200px" alt="Illustration" />
-							</div>
-						</div>
+			<div class="fiche fragment fade-right" style="background-color: #bfd6fa">
+				<div class="fiche-text">
+					<p class="fiche-description small">
+						Le récit est composé de plusieurs récits-témoignages sur le génocide au Rwanda, que
+						ce soit des victimes ou des bourreaux, et propose ainsi un travail de mémoire. Cette
+						structure énonciative vise également à essayer de comprendre, sans toutefois pouvoir
+						expliquer cet événement terrible.
+				</div>
 
-						<div class="fiche fragment fade-right" style="background-color: #bfd6fa">
-							<div class="fiche-text">
-								<p class="fiche-description small">
-									Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour une
-									cérémonie officielle de restitution de « la dent » de Lumumba, leader
-									indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux discours de
-									réparation. Le « Je » – président, femme, fils, soldat, guérisseur, ancêtre, paysan
-									du Congo, combattant du Congo libre, président de l’Union africaine, historien de
-									l’âge, tigritude du Congo – en veut à mort au représentant d’une « criminelle
-									dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort vaudra.
-								</p>
-							</div>
+				<div class="fiche-image">
+					<img src="https://m.media-amazon.com/images/I/A1Wh3rrrmuL._AC_UF1000,1000_QL80_.jpg" width="200px"
+						alt="Illustration" />
+				</div>
+			</div>
 
-							<div class="fiche-image">
-								<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg"
-									width="200px" alt="Illustration" />
-							</div>
-						</div>
-					</div>
-				</section>
-			</section>
-	<section data-background="radial-gradient( #ffffff,#6D8874)">
-			<section id="1-histoire">
-	
-					<h2>3. L’histoire littéraire autrement : déconstruire les périodisations</h2>
-					<p class="justify">L’histoire de la littérature africaine de langue française a longtemps été
-						découpée selon des périodisations liées aux grands moments de l’histoire politique et coloniale
-						: temps de la revendication identitaire (années 1930-1950), de l’indépendance (1960), de la
-						désillusion postcoloniale (années 1980), puis de la « mondialisation » (années 2000). Ces
-						catégories, bien qu’efficaces pour dégager des tendances, figent les textes dans une chronologie
-						téléologique, souvent liée à l’histoire des idées politiques, et réduisent les œuvres à des
-						documents de contexte.</p>
-					<q class="fragment"> Ce sont donc les corpus constitués qui permettront, dans un second temps, de
-						revenir aux contextes et aux figures d’auteur.e.s : il ne s’agit pas d’une expulsion de
-						l’Histoire, mais bien de la faire exister à partir des textes, ce qui nous semble essentiel pour
-						fonder une histoire littéraire. Ainsi, nous créons un lien fort entre poétique et démarche
-						historique, en suivant le constat de Guillaume Bridet : « Construire des objets, configurer un
-						espace, conduire des récits associés et concurrents et faire entendre des voix : il apparaît que
-						l’écriture de l’histoire littéraire, si elle relève de la science et de la politique, relève
-						également de la poétique »</q>
+			<div class="fiche fragment fade-right" style="background-color: #bfd6fa">
+				<div class="fiche-text">
+					<p class="fiche-description small">
+						Mise en accusation du roi des Belges, venu à Kinshasa en juin 2022 pour une
+						cérémonie officielle de restitution de « la dent » de Lumumba, leader
+						indépendantiste assassiné en 1961. L’événement est dénoncé comme un faux discours de
+						réparation. Le « Je » – président, femme, fils, soldat, guérisseur, ancêtre, paysan
+						du Congo, combattant du Congo libre, président de l’Union africaine, historien de
+						l’âge, tigritude du Congo – en veut à mort au représentant d’une « criminelle
+						dynastie » à laquelle aucun pardon ne peut être accordé : seule la mort vaudra.
+					</p>
+				</div>
 
-
-				</section>
-
-				<section>
-					<h2>
-						Années de parution des titres du corpus
-					</h2>
-					<p>La constitution d'un corpus présente évidemment des biais - cet axe chronologique ne peux être
-						tenu pour représentatif de parution littéraires africaines de langue française. En effet il
-						représente les textes ayant étés intégrés au corpus par les chercheuses pour l'instant. </p>
-					<iframe src="visualisations/timeline.html" width="100%" height="650" style="border:none;"></iframe>
-				</section>
-
-			</section>
-
-			<section>
-				<section>
-					<iframe src="visualisations/voix.html" width="100%" height="650" style="border:none;"></iframe>
-				</section>
-				<section>
-					<iframe src="visualisations/sunburst-ethos.html" width="120%" height="700"
-						style="border:none;"></iframe>
-				</section>
-			</section>
-
-
+				<div class="fiche-image">
+					<img src="https://static.fnac-static.com/multimedia/Images/FR/NR/b9/97/14/18126777/1507-1/tsp20241029143218/La-dent-de-Lumumba.jpg"
+						width="200px" alt="Illustration" />
+				</div>
+			</div>
 		</div>
+	</section>
+
+	<section id="2-ethos">
+		<p class="justify">Ce diagramme présente la répartition des textes du corpus par ethos. </p>
+		<iframe src="visualisations/radial-cluster-original-zoom.html" width="100%" height="650"
+			style="border:none; "></iframe>
+
+	</section>
+	</section>
+
+	<!-- Littérature africaine -->
+
+	<section data-background="radial-gradient( #ffffff,#93a8acab )">
+		<section id="1-litterature">
+			<h2>2. Qu’est-ce qu’une littérature « africaine » ?</h2>
+			<div>
+				<p class="italic justify">« Qu’est-ce que la littérature africaine ? » Le débat qui s’ensuivit
+					fut
+					animé. Fallait-il
+					appeler littérature africaine la littérature qui parlait de l’Afrique et de la vie en
+					Afrique ? La littérature qu’écrivaient les Africains ? Que fallait-il faire d’un
+					non-Africain qui écrivait sur l’Afrique ? Écrivait-il de la littérature africaine ?
+					Qu’advenait-il si un écrivain africain décidait de situer son intrigue au Groenland ?
+					Était-ce de la littérature africaine ? Ou était- ce la langue qui devait servir de critère ?
+					Qu’en était-il alors de l’arabe, parlé par certains Africains ? Que faire du français et de
+					l’anglais, devenus à leur façon des langues d’Afrique ? Que se passait-il si un Européen
+					décidait d’écrire sur l’Europe en langue africaine ? Qu’advenait-il si... et si... et si...
+					et si... ?</p>
+				<p class="justify">Ngugi Wa Thiong’o, <i class="italic">Décoloniser l’esprit</i>, traduit et
+					préfacé par S.
+					Prudhomme, Paris,
+					La Fabrique, 2011 [1986] </p>
+			</div>
+			<br>
+			<a href="#/2-litterature">
+				<img src="data/images/down-arrow.png" alt="down arrow" width="100">
+			</a>
+		</section>
+		<section id="2-litterature" class="justify">
+			<p>L’expression <i>littérature africaine</i> est à la fois familière et problématique. Elle semble
+				désigner un ensemble stable d’œuvres produites par des auteur·es du continent africain.</p>
+			<p class="fragment">Pourtant, cette catégorie soulève de nombreuses questions : à partir de quels
+				critères cette appartenance est-elle définie ? Par la naissance ? La nationalité ? Le lieu de
+				publication ? La langue ? L’expérience diasporique ?</p>
+		</section>
+		<section class="justify">
+			<p>La formule masque une grande hétérogénéité linguistique, géographique, historique et esthétique.
+				Elle est aussi le produit d’un regard postcolonial, souvent européen, qui tend à essentialiser
+				les œuvres en les rapportant à une supposée africanité. Or les auteur·es classé·es comme «
+				africain·es » sont marqué·es par des références multiples, s’inscrivent dans des traditions
+				littéraires transnationales et ne se laissent réduire à des étiquettes nationales ou
+				continentales.</p>
+			<p class="fragment">
+				Dans le cadre de ce projet, une fiction dont la « voix » (personnage ou narrateur-énonciateur)
+				peut être associée à une présence africaine est retenu pour cette histoire littéraire.
+			</p>
+		</section>
+
+		<section id="map-slide" data-auto-animate>
+			<p class="justify" data-id="map-description">Cette carte présente les lieux où se déroulent les
+				intrigues des textes du corpus. L'ethos du texte est indiqué par une couleur correspondante,
+				ainsi que sa date de parution.</p>
+
+			<div data-id="map-container"
+				style="flex-grow: 1; display: flex; align-items: center; height: 75vh; background-color: #93a8acab; border-radius: 8px;">
+				<div class="legend" data-id="map-legend">
+					<iframe src="visualisations/map-controls.html"
+						style="width: 100%; height: 35vh; border: none;"></iframe>
+					<div style="width: 100%; height: 40%;border: none;" id="questionFrame">
+						<div class="question-box-map justify" data-id="box1">
+							<p class="justify questions">Dans quelle région l'ethos cosmopolite est-il le plus
+								présent&nbsp;?</p>
+						</div>
+						<div class="question-box-map justify" data-id="box2">
+							<p class="justify questions">Comparez l'évolution temporelle de l'ethos de genre et
+								de l'ethos mémoriel.</p>
+						</div>
+
+						<div class="question-box-map justify" data-id="box3">
+							<p class="justify questions">Quel ethos est le plus représenté au Rwanda&nbsp;?
+							</p>
+						</div>
+					</div>
+				</div>
+				<iframe src="visualisations/map.html" class="main-map" data-id="map-frame"></iframe>
+			</div>
+		</section>
+
+		<section data-auto-animate>
+			<div data-id="map-container"
+				style="flex-grow: 1; display: flex; align-items: center; height: 75vh; background-color: #93a8acab; border-radius: 8px;">
+
+				<div class="legend" data-id="map-legend" style="width: 100%; padding: 15px; box-sizing: border-box;">
+
+					<!-- Conteneur horizontal pour chaque question+réponse -->
+					<div id="questionFrame"
+						style="display: flex; justify-content: space-between; gap: 15px; margin-bottom: 15px;">
+
+						<!-- Bloc 1 -->
+						<div class="question-block">
+							<div class="question-box-map horizontal" data-id="box1">
+								<p class="justify questions">Dans quelle région l'ethos cosmopolite est-il le
+									plus présent&nbsp;?</p>
+							</div>
+							<p class="question-answer">
+								L’ethos cosmopolite apparaît majoritairement dans les textes situés dans des
+								capitales ou grandes villes à forte ouverture internationale, notamment Paris.
+								Ces lieux sont souvent décrits comme des carrefours culturels, marqués par le
+								plurilinguisme, l’hybridation des références et la mobilité des personnages. Il
+								se manifeste principalement à partir des années 2000, en parallèle de la
+								mondialisation culturelle et de l’essor de récits diasporiques.
+							</p>
+						</div>
+
+						<!-- Bloc 2 -->
+						<div class="question-block">
+							<div class="question-box-map horizontal" data-id="box2">
+								<p class="justify questions">Comparez l'évolution temporelle de l'ethos de genre
+									et de l'ethos mémoriel.</p>
+							</div>
+							<p class="question-answer">[Réponse à ajouter ici]</p>
+						</div>
+
+						<!-- Bloc 3 -->
+						<div class="question-block">
+							<div class="question-box-map horizontal" data-id="box3">
+								<p class="justify questions">Quel ethos est le plus représenté au Rwanda&nbsp;?
+								</p>
+							</div>
+							<p class="question-answer">[Réponse à ajouter ici]</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+	</section>
+	<section data-background="radial-gradient( #ffffff,#6D8874)">
+		<section id="1-histoire">
+
+			<h2>3. L’histoire littéraire autrement : déconstruire les périodisations</h2>
+			<p class="justify">L’histoire de la littérature africaine de langue française a longtemps été
+				découpée selon des périodisations liées aux grands moments de l’histoire politique et coloniale
+				: temps de la revendication identitaire (années 1930-1950), de l’indépendance (1960), de la
+				désillusion postcoloniale (années 1980), puis de la « mondialisation » (années 2000). Ces
+				catégories, bien qu’efficaces pour dégager des tendances, figent les textes dans une chronologie
+				téléologique, souvent liée à l’histoire des idées politiques, et réduisent les œuvres à des
+				documents de contexte.</p>
+			<q class="fragment"> Ce sont donc les corpus constitués qui permettront, dans un second temps, de
+				revenir aux contextes et aux figures d’auteur.e.s : il ne s’agit pas d’une expulsion de
+				l’Histoire, mais bien de la faire exister à partir des textes, ce qui nous semble essentiel pour
+				fonder une histoire littéraire. Ainsi, nous créons un lien fort entre poétique et démarche
+				historique, en suivant le constat de Guillaume Bridet : « Construire des objets, configurer un
+				espace, conduire des récits associés et concurrents et faire entendre des voix : il apparaît que
+				l’écriture de l’histoire littéraire, si elle relève de la science et de la politique, relève
+				également de la poétique »</q>
+
+
+		</section>
+
+		<section>
+			<h2>
+				Années de parution des titres du corpus
+			</h2>
+			<p>La constitution d'un corpus présente évidemment des biais - cet axe chronologique ne peux être
+				tenu pour représentatif de parution littéraires africaines de langue française. En effet il
+				représente les textes ayant étés intégrés au corpus par les chercheuses pour l'instant. </p>
+			<iframe src="visualisations/timeline.html" width="100%" height="650" style="border:none;"></iframe>
+		</section>
+
+	</section>
+
+	<section>
+		<section>
+			<iframe src="visualisations/voix.html" width="100%" height="650" style="border:none;"></iframe>
+		</section>
+		<section>
+			<iframe src="visualisations/sunburst-ethos.html" width="120%" height="700" style="border:none;"></iframe>
+		</section>
+	</section>
+
+
+	</div>
 
 	</div>
 
@@ -432,6 +531,86 @@
 		});
 
 	</script>
+
+	<script>
+		const colors = {
+			"Ethos cosmopolite": "#E2B4BD",
+			"d'opposition": "#93A8AC",
+			"de genre": "#B88D00",
+			"environnemental": "#c08cb2",
+			"de la migrance": "#9ab180",
+			"de la présence": "#DB7F67",
+			"mémoriel": "#345995"
+		};
+
+		let animationFrame;
+		let bouncingCircles = [];
+
+		function startCircleAnimation() {
+			const container = document.getElementById("circle-container");
+			const bounds = container.getBoundingClientRect();
+			container.innerHTML = ''; // Clear previous
+
+			const screenW = container.offsetWidth;
+			const screenH = container.offsetHeight;
+
+			bouncingCircles = [];
+
+			for (let label in colors) {
+				const div = document.createElement("div");
+				div.className = "circle";
+				div.textContent = label;
+				div.style.backgroundColor = colors[label];
+
+				const circle = {
+					el: div,
+					x: Math.random() * (screenW - 80),
+					y: Math.random() * (screenH - 80),
+					dx: (Math.random() - 0.5) * 4,
+					dy: (Math.random() - 0.5) * 4,
+				};
+
+				container.appendChild(div);
+				bouncingCircles.push(circle);
+			}
+
+			function animate() {
+				const W = container.offsetWidth;
+				const H = container.offsetHeight;
+
+				for (let c of bouncingCircles) {
+					c.x += c.dx;
+					c.y += c.dy;
+
+					if (c.x <= 0 || c.x >= W - 80) c.dx *= -1;
+					if (c.y <= 0 || c.y >= H - 80) c.dy *= -1;
+
+					c.el.style.transform = `translate(${c.x}px, ${c.y}px)`;
+				}
+
+
+				animationFrame = requestAnimationFrame(animate);
+			}
+
+			animate();
+		}
+
+		function stopCircleAnimation() {
+			cancelAnimationFrame(animationFrame);
+			const container = document.getElementById("circle-container");
+			container.innerHTML = '';
+		}
+
+		// Reveal.js hook
+		Reveal.on('slidechanged', function (event) {
+			if (event.currentSlide.id === "animated-ethos-slide") {
+				startCircleAnimation();
+			} else {
+				stopCircleAnimation();
+			}
+		});
+	</script>
+
 
 </body>
 

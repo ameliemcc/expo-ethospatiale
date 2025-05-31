@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sidebar</title>
+</head>
+<link rel="stylesheet" href="../dist/theme/custom.css">
+
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" onclick="navigateToSlide('ethos-opposition')">Ethos d'opposition</a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-memoriel')">Ethos mémoriel</a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-presence')">Ethos de la présence</a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-genre')">Ethos de genre</a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-cosmopolite')">Ethos cosmopolite </a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-migrance')">Ethos de la migrance </a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('ethos-environnemental')">Ethos environnemental</a></li>
+            <br>
+            <li><a href="#" onclick="navigateToSlide('2-ethos')">Diagramme de répartition des ethos</a></li>
+        </ul>
+    </div>
+
+
+    <script>
+        function navigateToSlide(slideId) {
+            if (window.parent && window.parent.location) {
+                window.parent.location.hash = '/' + slideId;
+            }
+        }
+    </script>
+</body>
+
+</html>

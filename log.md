@@ -2,7 +2,27 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-Total : 123 heures
+Total : 148 heures
+
+
+## 1 juin
+*9 heures*
+
+- sidebar ethos
+- ajout questions
+
+## 30 mai
+*8 heures*
+
+- radial cluster update
+- css styling 
+- amélioration map 
+
+## 29 mai
+*8 heures*
+
+- css styling
+- changements texte
 
 ## 28 mai 
 *9 heures*
@@ -59,7 +79,7 @@ Total : 123 heures
 ## 20 mai
 *6 heures*
 
-frise chronologique
+- frise chronologique
 
 ## 19 mai
 *5 heures*

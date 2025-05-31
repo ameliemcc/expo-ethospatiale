@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Radial tree</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="../dist/theme/custom.css" id="theme">
+
+
+</head>
+
+<body style="display: flex; flex-direction: row; gap: 40px; padding: 20px; align-items: flex-start;">
+  <!-- LEFT COLUMN: info + question boxes stacked -->
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div id="info-box" style="
+      width: 250px;
+      background: rgba(255, 255, 255, 0.95);
+      color: black;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 14px;
+      overflow-wrap: break-word;
+      min-height: 150px;
+      height: fit-content;
+    ">
+      <p>Cliquer sur un ethos pour lire sa description. </p>
+    </div>
+
+    <div id="question-box" class="question-box" style="
+      width: 250px;
+      color: black;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 14px;
+      overflow-wrap: break-word;
+      min-height: 150px;
+      height: fit-content;
+    ">
+      <p class="justify questions">Parmis vos lectures, pouvez vous en associer certaines aux ethos suivants?</p>
+      <p class="justify questions">À votre avis, pourquoi l'ethos environnemental est-il sous-représenté?</p>
+      <p class="justify questions">Quel est l'intêret d'associer un ethos à un texte? Serait-il possible d'en associer plusieurs? </p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE: SVG + zoom buttons -->
+  <div style="position: relative; display: inline-block; margin-bottom: 15px;">
+    <svg id="radial-tree" width="600" height="550"
+      style="display: block; background-color: #372323; border-radius: 8px;"></svg>
+
+    <!-- Zoom buttons -->
+    <div style="
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    ">
+      <button id="zoom-in" style="
+        background: #E2B4BD;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        transition: background 0.3s;
+      ">+</button>
+      <button id="zoom-out" style="
+        background: #93A8AC;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        transition: background 0.3s;
+      ">−</button>
+    </div>
+  </div>
+
+
+
+    <script>
+
+      const EthosDescriptions = {
+        "cosmopolite": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui rend compte d'une expérience culturelle plurielle, signifiant un regard démultiplié sur le monde. La perspective énonciative - par la focalisation et les points de vue – présente un sujet africain mobile et autonome, qui choisit les espaces multiples qu'il traverse. Cette voix transculturelle affirmée prend forme dans l'intrigue, mais peut aussi être significative grâce à des stratégies formelles, telle l'intertextualité.",
+        "d'opposition": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui donne accès à un « contre-dire ». La perspective énonciative – par la focalisation et les points de vue – dénonce et remet en question des contextes politiques et sociaux, collectifs ou individuels. Cet enjeu se dévoile autant par la thématique que l'expression même du récit et des discours.",
+        "de genre": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui rend compte d’expériences de personnages féminins confrontés à une situation de subalternité dans des sociétés ou communautés patriarcales. La perspective énonciative – par la focalisation et les points de vue – remet en question une situation de domination ou de dépendance. Cet enjeu est désormais aussi incarné par des énonciateurs et personnages transgenres ou homosexuels.",
+        "environnemental": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui rend compte d'une expérience territoriale, de l'environnement valorisé ou dégradé. La perspective énonciative — par la focalisation et les points de vue - oriente la perception sur un actant non-humain qui est le lieu à partir duquel s'organise la diversité des relations au sein du récit.",
+        "de la migrance": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui rend compte d'une « migrance du moi » qui incarne une relation au monde instable, sans repères fixes. La perspective énonciative – par la focalisation et les points de vue - met en scène un sujet africain qui subit son environnement. Sa migrance peut être géographique (topographique) ou symbolique (topologique); elle figure une mobilité dont les chemins peinent à se dessiner.",
+        "de la présence": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par l'expérience d'un sujet africain qui donne accès à sa culture, à partir de son lien à l'espace continental. Souvent, la perspective énonciative — par la focalisation et les points de vue - oriente la réception en tant que récit de témoignage, même fictif. Mais cette affirmation de civilisation, de culture et de société se projette aussi, désormais, dans le futur en valorisant des savoirs, des appartenances et des expériences pré-coloniaux.",
+        "mémoriel": "La voix narrative dominante, pour ce type de scènes énonciatives, se caractérise par une présence qui actualise l’expérience collective d’un temps historique, mais peut aussi rendre compte, par une destinée individuelle, d’une lignée ou d’une filiation. La mémoire vise à compenser la négation structurelle voulue par la colonisation, en replaçant des civilisations d'Afrique dans l'histoire mondiale, mais aussi des communautés et des individus disparus sans laisser de traces. La perspective énonciative – par la focalisation et les points de vue – crée une résonance avec le moment d’énonciation, ou de publication.",
+
+      };
+
+      const zoomStep = 2; // zoom multiplier per click
+
+      d3.select("#zoom-in").on("click", () => {
+        svg.transition().call(zoom.scaleBy, zoomStep);
+      });
+
+      d3.select("#zoom-out").on("click", () => {
+        svg.transition().call(zoom.scaleBy, 1 / zoomStep);
+      });
+
+      const CouleursEthos = {
+        "cosmopolite": "#E2B4BD",
+        "d'opposition": "#93A8AC",
+        "de genre": "#B88D00",
+        "environnemental": "#c08cb2",
+        "de la migrance": "#9ab180",
+        "de la présence": "#DB7F67",
+        "mémoriel": "#345995"
+      };
+
+
+      const width = 1000; // change la forme
+      const height = width;
+      const cx = width * 0.5;
+      const cy = height * 0.52;
+      const radius = Math.min(width, height) / 2 - 200;
+
+      const svg = d3.select("#radial-tree")
+        .attr("viewBox", [-cx, -cy, width, height])
+        .style("font", "10px turnip")
+        .style("user-select", "none");
+
+      const mainGroup = svg.append("g").attr("class", "main-group");
+
+      // Setup zoom behavior
+      const zoom = d3.zoom()
+        .scaleExtent([0.5, 5]) // min and max zoom scale
+        .on("zoom", (event) => {
+          mainGroup.attr("transform", event.transform);
+        });
+
+      svg.call(zoom);
+
+      const tree = d3.tree()
+        .size([2 * Math.PI, radius])
+        .separation(() => 1);
+
+      // CSV
+      d3.text("../data/titre_ethos.csv").then(csvText => {
+        const lines = csvText.trim().split("\n");
+        const entries = lines.map(line => {
+          const [book, ethosRaw] = line.split(";").map(d => d.trim());
+          const ethos = ethosRaw.replace("Ethos ", "");
+          return { book, ethos };
+        });
+        console.log(entries)
+        const grouped = d3.group(entries, d => d.ethos);
+
+        const data = {
+          name: "ethos",
+          children: Array.from(grouped, ([ethos, books]) => ({
+            name: ethos,
+            children: books.map(b => ({ name: b.book }))
+          }))
+        };
+
+
+        const root = tree(d3.hierarchy(data));
+        const links = root.links();
+        var nodes = root.descendants();
+
+        nodes.forEach(d => {
+          if (!d.children && d.parent) {
+            d.color = CouleursEthos[d.parent.data.name];
+          } else if (CouleursEthos[d.data.name]) {
+            d.color = CouleursEthos[d.data.name];
+          } else {
+            d.color = "#ccc";
+          }
+        });
+
+        // Links
+        mainGroup.append("g")
+          .attr("fill", "none")
+          .attr("stroke-opacity", 0.6)
+          .attr("stroke-width", 1.5)
+          .selectAll("path")
+          .data(links)
+          .join("path")
+          .attr("d", d3.linkRadial()
+            .angle(d => d.x)
+            .radius(d => d.y))
+          .attr("stroke", d => (d.target && d.target.color) ? d.target.color : "#ccc");
+
+
+        // Nodes
+        mainGroup.append("g")
+          .selectAll("circle")
+          .data(nodes)
+          .join("circle")
+          .attr("transform", d => `
+      rotate(${d.x * 180 / Math.PI - 90})
+      translate(${d.y},0)
+    `)
+          .attr("r", 2.5)
+          .attr("fill", d => d.color || "#999");
+
+        // Labels
+        // Labels
+        const labels = mainGroup.append("g")
+          .selectAll("text")
+          .data(nodes)
+          .join("text")
+          .attr("transform", d => `
+    rotate(${d.x * 180 / Math.PI - 90})
+    translate(${d.y},0)
+    rotate(${d.x >= Math.PI ? 180 : 0})
+  `)
+          .attr("dy", "0.31em")
+          .attr("x", d => d.x < Math.PI === !d.children ? 6 : -6)
+          .attr("text-anchor", d => d.x < Math.PI === !d.children ? "start" : "end")
+          .text(d => d.data.name)
+          .style("fill", d => d.color || "black")
+          .style("cursor", d => d.children ? "pointer" : "default")
+          .on("click", (event, d) => {
+            if (d.children) {
+              const ethosName = d.data.name;
+              const description = EthosDescriptions[ethosName] || "Cliquer sur un ethos pour lire sa description. ";
+
+              d3.select("#info-box").html(`
+        <h3>Ethos ${ethosName}</h3>
+        <p class="justify" style="font-size:15px">${description}</p>
+      `);
+            }
+          });
+      });
+
+    </script>
+
+</body>
+
+</html>
