@@ -13,6 +13,7 @@ Total : 148 heures
 - format questions
 - sidebar ethos
 - ajout questions
+- fiches ethos
 
 ## 30 mai
 *8 heures*

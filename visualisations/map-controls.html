@@ -5,54 +5,44 @@
   <meta charset="UTF-8">
   <title>Contrôles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-  
-  </style>
-  <link rel="stylesheet" href="../dist/theme/shepherd-style.css">
-	<link rel="stylesheet" href="../dist/theme/custom.css">
 
+  <link rel="stylesheet" href="../dist/theme/shepherd-style.css">
+  <link rel="stylesheet" href="../dist/theme/custom.css">
 
 </head>
 
 <body>
-<div class="turnip-normal">
-  <label style="  font-size: 16px; margin-bottom: 10px; display: inline-block;" class="decadeOnOff"><input type="checkbox" id="toggleDecadeFilter" checked> Filtrer par
-    décennie </label>
-  <label style="font-size: 16px;" class="decadeSlider">Sélectionner la décennie: </label>
-  <input type="range" id="decadeSlider" min="1940" max="2020" step="10" value="2020">
-  <span  style="font-size: 14px; margin-bottom: 10px; display: inline-block;" id="decadeLabel">2020</span>
+  <div class="turnip-normal">
+    <label style="  font-size: 16px; margin-bottom: 10px; display: inline-block;" class="decadeOnOff"><input
+        type="checkbox" id="toggleDecadeFilter" checked> Filtrer par
+      décennie </label>
+    <label style="font-size: 16px;" class="decadeSlider">Sélectionner la décennie: </label>
+    <input type="range" id="decadeSlider" min="1940" max="2020" step="10" value="2020">
+    <span style="font-size: 14px; margin-bottom: 10px; display: inline-block;" id="decadeLabel">2020</span>
 
-<div style="width: 100%; margin-bottom: 10px; display: inline-block;">
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #E2B4BD;"></span>Ethos cosmopolite</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #93A8AC;"></span>Ethos d'opposition</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #FFD447;"></span>Ethos de genre</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #3E5622;"></span>Ethos de la migrance</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #DB7F67;"></span>Ethos de la présence</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #700353;"></span>Ethos environnemental</div>
-								<div class="ethos-item"><span class="color-box"
-										style="background-color: #345995;"></span>Ethos mémoriel</div>
-							</div>
+    <div style="width: 100%; display: inline-block;">
+      <div class="ethos-item"><span class="color-box" style="background-color: #E2B4BD;"></span>Ethos cosmopolite</div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #93A8AC;"></span>Ethos d'opposition</div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #FFD447;"></span>Ethos de genre</div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #3E5622;"></span>Ethos de la migrance
+      </div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #DB7F67;"></span>Ethos de la présence
+      </div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #700353;"></span>Ethos environnemental
+      </div>
+      <div class="ethos-item"><span class="color-box" style="background-color: #345995;"></span>Ethos mémoriel</div>
+    </div>
+  </div>
 
-      
+  <script>
+    const iframe = document.getElementById('questionFrame');
 
-
-</div>
-
-<script>
-  const iframe = document.getElementById('questionFrame');
-
-  iframe.addEventListener("load", function () {
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-    const contentHeight = iframeDocument.body.scrollHeight;
-    iframe.style.height = contentHeight + "px";
-  });
-</script>
+    iframe.addEventListener("load", function () {
+      const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+      const contentHeight = iframeDocument.body.scrollHeight;
+      iframe.style.height = contentHeight + "px";
+    });
+  </script>
   <script type="module">
     import Shepherd from 'https://cdn.jsdelivr.net/npm/shepherd.js@13.0.0/dist/esm/shepherd.mjs';
 
@@ -90,19 +80,19 @@
       ]
     });
     tour.addStep({
-								id: 'example-step1',
-								text: 'Les ethos sont représentés par des points des couleurs. ',
-								attachTo: {
-									element: '.turnip-normal',
-									on: 'bottom'
-								},
-								buttons: [
-									{
-										text: 'OK',
-										action: tour.next
-									}
-								]
-							});
+      id: 'example-step1',
+      text: 'Les ethos sont représentés par des points des couleurs. ',
+      attachTo: {
+        element: '.turnip-normal',
+        on: 'bottom'
+      },
+      buttons: [
+        {
+          text: 'OK',
+          action: tour.next
+        }
+      ]
+    });
 
     tour.start();
   </script>
@@ -147,8 +137,6 @@
     checkbox.addEventListener("change", sendUpdate);
   </script>
 
-
 </body>
 
 </html>
-

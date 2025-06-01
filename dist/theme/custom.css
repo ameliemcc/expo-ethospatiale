@@ -23,7 +23,6 @@
   font-style: normal;
 }
 
-/* Ensure certain elements are never larger than the slide itself */
 
 h1 {
   font-family: "turnip-title";
@@ -43,17 +42,17 @@ h3 {
 .turnip-normal {
   font-family: "turnip-normal";
   font-size: 18px;
-color: #4e3e35;
+  color: #4e3e35;
 }
 
 .plan-box {
   transition: background-color 0.3s ease;
 }
 
-/* Box colors and hover states */
 .bg-purple {
   background-color: #c5a6b5;
 }
+
 .bg-purple:hover {
   background-color: #dabfd0;
 }
@@ -61,6 +60,7 @@ color: #4e3e35;
 .bg-grey {
   background-color: #93a8acab;
 }
+
 .bg-grey:hover {
   background-color: #d7e4e5;
 }
@@ -68,22 +68,23 @@ color: #4e3e35;
 .bg-green {
   background-color: #9ab180;
 }
+
 .bg-green:hover {
   background-color: #b5c8a3;
 }
 
 
-.question-box{
-     background:#e2dade;
+.question-box {
+  background: #e2dade;
 }
 
 .plan-box {
   font-size: 18px;
-  margin: 10px 0;                
-  padding-left: 30px; 
-  padding-top: 10px;  
-  padding-bottom: 10px;   
-  padding-right: 30px;      
+  margin: 10px 0;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
   border-radius: 8px;
   color: black;
   width: 100%;
@@ -95,8 +96,8 @@ color: #4e3e35;
 
 .question-box-map {
   font-size: 14px;
-  margin: 10px 0;                
-  padding: 4px 5px;            
+  margin: 10px 0;
+  padding: 4px 5px;
   border-radius: 8px;
   background-color: #e2dade;
   color: black;
@@ -105,6 +106,8 @@ color: #4e3e35;
   display: flex;
   align-items: center;
   gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 
@@ -129,7 +132,7 @@ color: #4e3e35;
   color: black;
   box-sizing: border-box;
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 
 
@@ -155,7 +158,7 @@ color: #4e3e35;
   background-image: url(../../data/images/question.png);
   background-size: contain;
   background-repeat: no-repeat;
-  width: 16px;   /* adjust size as needed */
+  width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
@@ -168,27 +171,28 @@ color: #4e3e35;
   padding: 10px;
   border-radius: 8px;
   background-color: #3E5622;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
   font-family: "turnip-normal", sans-serif;
 }
 
-.sidebar-content a{
+.sidebar-content a {
   margin-top: 0;
   font-size: 16px;
   color: #478d77;
 }
+
 .sidebar {
-  color: #333; /* or white, or any color you prefer */
+  color: #333;
   font-family: "turnip-normal", sans-serif;
 }
 
 .sidebar a {
-  color: #1a5c7a; /* link color */
+  color: #645144;
   text-decoration: none;
 }
 
 .sidebar a:hover {
-  color: #b17d8f; /* hover color */
+  color: #b17d8f;
 }
 
 p {
@@ -226,24 +230,71 @@ blockquote {
   font-size: 15px;
 }
 
+.ethos-section {
+  margin-top: 2rem;
+}
+
+.ethos-section h3 {
+  margin-bottom: 1rem;
+}
+
+.ethos-layout {
+  display: flex;
+  gap: 20px;
+  height: 75vh;
+}
+
+.ethos-sidebar {
+  flex: 0 0 200px;
+  overflow: auto;
+  border-right: 1px solid #ccc;
+  padding-right: 15px;
+}
+
+.ethos-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-left: 15px;
+  padding-top: 50px;
+}
+
+
+
+.fiche-description.small {
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+
 .fiche {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 10px;
+  gap: 15px;
   background-color: #f5e4c3;
-  padding: 10px;
-  height: fit-content;
-  align-items: start;
+  padding: 15px;
   border-radius: 8px;
-
+  align-items: start;
+  margin: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .fiche-text {
-  font-size: 13px;
+  font-size: 18px;
+  line-height: 1.5;
   display: flex;
   flex-direction: column;
 }
+
+
+.fiche-image img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+
+}
+
 
 .legend {
   border-radius: 8px;
@@ -259,6 +310,9 @@ blockquote {
 
 .fiche-description {
   margin: 0;
+  text-align: justify;
+
+
 }
 
 .fiche-image img {
@@ -271,6 +325,7 @@ blockquote {
 .main-map {
   height: 100%;
   flex-grow: 1;
+  
   box-sizing: border-box;
   margin-right: 10px;
   border-radius: 8px;
@@ -284,14 +339,48 @@ blockquote {
 }
 
 
-	.color-box {
-		border-radius: 8px;
-		width: 14px;
-		height: 14px;
-		display: inline-block;
-		margin-right: 8px;
-		border: 1px solid #4e3e35;
-	}
+.color-box {
+  border-radius: 8px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 8px;
+  border: 1px solid #4e3e35;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #30bcc6;
+  shape-rendering: crispEdges;
+}
+
+.year-label {
+  font-size: 10px;
+  text-anchor: middle;
+  font-family: "turnip-normal";
+  fill: #7B6C73;
+}
+
+.book {
+  font-size: 12px;
+  font-family: "turnip-normal";
+  fill: #7B6C73;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.dot {
+  fill: #315659;
+}
+
+.leader {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1px;
+
+}
+
 
 section.has-dark-background,
 section.has-dark-background h1,
@@ -444,6 +533,7 @@ section.has-dark-background h6 {
 
 .reveal em {
   font-style: italic;
+  font-family: "turnip-normal";
 }
 
 .reveal ol,

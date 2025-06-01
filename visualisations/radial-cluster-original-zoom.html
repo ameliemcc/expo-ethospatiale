@@ -14,7 +14,7 @@
   <div style="display: flex; flex-direction: column; gap: 20px;">
     <div id="info-box" style="
       width: 250px;
-      background: rgba(255, 255, 255, 0.95);
+      background-color: #93a8acab;
       color: black;
       border-radius: 8px;
       padding: 15px;
@@ -204,7 +204,6 @@
         .attr("r", 2.5)
         .attr("fill", d => d.color || "#999");
 
-      // Labels
       // Labels
       const labels = mainGroup.append("g")
         .selectAll("text")
