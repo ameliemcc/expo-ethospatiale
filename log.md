@@ -5,9 +5,12 @@
 Total : 148 heures
 
 
+
 ## 1 juin
 *9 heures*
 
+- intro dynamique
+- format questions
 - sidebar ethos
 - ajout questions
 
