@@ -45,9 +45,7 @@ h3 {
   color: #4e3e35;
 }
 
-.plan-box {
-  transition: background-color 0.3s ease;
-}
+
 
 .bg-purple {
   background-color: #c5a6b5;
@@ -55,6 +53,14 @@ h3 {
 
 .bg-purple:hover {
   background-color: #dabfd0;
+}
+
+.bg-color {
+  background-color:  #a7747f;;
+}
+
+.bg-color:hover {
+  background-color: #cda6ae;
 }
 
 .bg-grey {
@@ -79,19 +85,22 @@ h3 {
 }
 
 .plan-box {
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-size: 18px;
-  margin: 10px 0;
+  margin: auto;
+  margin-bottom: 20px;
   padding-left: 30px;
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   padding-right: 30px;
   border-radius: 8px;
   color: black;
-  width: 100%;
+  width: 70%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 }
 
 .question-box-map {
@@ -214,7 +223,7 @@ h2 {
 
 li {
   font-size: 18px;
-  color: #6D8874;
+  color: #645144;
   
 }
 
