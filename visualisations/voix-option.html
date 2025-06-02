@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    body {
+        font: 12px sans-serif;
+    }
+
+    .line {
+        fill: none;
+        stroke-opacity: 0.3;
+    }
+
+    .line.selected {
+        stroke-opacity: 1;
+    }
+
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+        margin-right: 10px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: #faf5f8;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #848f98;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(24px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
+<link rel="stylesheet" href="../dist/theme/custom.css">
+
+<body>
+
+  <h3 style="text-align:center; font-family: turnip-normal;">Voix narratives dominantes par ethos</h3>
+
+    <div class="turnip-normal" style="width: 100%; display: flex; justify-content: center;">
+        <svg width="1000" height="450"></svg>
+    </div>
+    <div class="turnip-normal" style="text-align: center; margin-bottom: 10px; margin-left: 100px;">
+        <label class="switch">
+            <input type="checkbox" id="dataToggle">
+            <span class="slider round"></span>
+        </label>
+        <span id="dataLabel">Données existantes</span>
+    </div>
+    <div class="turnip-normal" id="infoBox" style="
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    background: #C5BEC2;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 5px;
+    width: 190px;
+    max-height: 200px;
+    font-size: 14px;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+"></div>
+
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        let aggregatedData = [];
+
+
+        let selectedLabel = null;
+        let selectedType = null;
+        const svg = d3.select("svg");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 20, bottom: 20, left: 250, right: 200 };
+
+        const ethosColors = {
+            "Ethos cosmopolite": "#E2B4BD",
+            "Ethos d'opposition": "#93A8AC",
+            "Ethos de genre": "#B88D00",
+            "Ethos environnemental": "#700353",
+            "Ethos de la migrance": "#3E5622",
+            "Ethos de la présence": "#DB7F67",
+            "Ethos mémoriel": "#345995"
+        };
+
+        function loadAndRender(dataPath) {
+            svg.selectAll("*").remove();
+
+            d3.dsv(";", dataPath).then(raw => {
+                const expandedData = raw.flatMap(row => {
+                    const ethos = row["Ethos d'opposition"]?.trim() || row["Ethos de genre"]?.trim() || row["Ethos de la migrance"]?.trim() || row["Ethos cosmopolite"]?.trim() || row["Ethos"]?.trim();
+                    const rawPronouns = row["Il"] || row["Pronoun"];
+                    if (!ethos || !rawPronouns) return [];
+                    return rawPronouns
+                        .split(";")
+                        .map(p => p.trim().toUpperCase())
+                        .filter(p => p)
+                        .map(pronoun => ({ ethos, pronoun }));
+                });
+
+                const ethosValues = Array.from(new Set(expandedData.map(d => d.ethos)));
+                const orderedPronouns = ["JE", "TU", "IL", "ELLE", "NOUS", "VOUS", "ILS", "ELLES"];
+
+                const pairCounts = d3.rollup(
+                    expandedData,
+                    v => v.length,
+                    d => d.ethos,
+                    d => d.pronoun
+                );
+                aggregatedData = Array.from(pairCounts, ([ethos, pronounMap]) =>
+                    Array.from(pronounMap, ([pronoun, count]) => ({ ethos, pronoun, count }))
+                ).flat();
+
+                const yEthos = d3.scalePoint()
+                    .domain(ethosValues)
+                    .range([margin.top, height - margin.bottom]);
+
+                const yPronoun = d3.scalePoint()
+                    .domain(orderedPronouns)
+                    .range([margin.top, height - margin.bottom]);
+
+                const xPos = {
+                    ethos: margin.left,
+                    pronoun: width - margin.right,
+                };
+
+                const widthScale = d3.scaleLinear()
+                    .domain([1, d3.max(aggregatedData, d => d.count)])
+                    .range([1, 20]);
+
+                const lines = svg.append("g")
+                    .selectAll("path")
+                    .data(aggregatedData)
+                    .join("path")
+                    .attr("class", "line")
+                    .attr("d", d => `
+              M${xPos.ethos},${yEthos(d.ethos)}
+              L${xPos.pronoun},${yPronoun(d.pronoun)}
+          `)
+                    .attr("stroke", d => ethosColors[d.ethos] || "#999")
+                    .attr("stroke-width", d => widthScale(d.count));
+
+                function updateLineColors() {
+                    lines.classed("selected", d => {
+                        if (!selectedLabel) return false;
+                        return selectedType === "ethos"
+                            ? d.ethos === selectedLabel
+                            : d.pronoun === selectedLabel;
+                    });
+                }
+
+                svg.selectAll(".labelEthos")
+                    .data(ethosValues)
+                    .join("text")
+                    .attr("class", "labelEthos")
+                    .attr("x", xPos.ethos - 10)
+                    .attr("y", d => yEthos(d))
+                    .attr("text-anchor", "end")
+                    .attr("alignment-baseline", "middle")
+                    .style("cursor", "pointer")
+                    .style("fill", d => ethosColors[d] || "#000")
+                    .text(d => d)
+                    .on("click", function (event, d) {
+                        if (selectedLabel === d && selectedType === "ethos") {
+                            selectedLabel = null;
+                            selectedType = null;
+                        } else {
+                            selectedLabel = d;
+                            selectedType = "ethos";
+                        }
+                        updateLineColors();
+                        updateInfoBox();
+
+                    });
+
+                svg.selectAll(".labelPronoun")
+                    .data(orderedPronouns)
+                    .join("text")
+                    .attr("class", "labelPronoun")
+                    .attr("x", xPos.pronoun + 10)
+                    .attr("y", d => yPronoun(d))
+                    .attr("text-anchor", "start")
+                    .attr("alignment-baseline", "middle")
+                    .style("cursor", "pointer")
+                    .text(d => d)
+                    .on("click", function (event, d) {
+                        if (selectedLabel === d && selectedType === "pronoun") {
+                            selectedLabel = null;
+                            selectedType = null;
+                        } else {
+                            selectedLabel = d;
+                            selectedType = "pronoun";
+                        }
+                        updateLineColors();
+                        updateInfoBox();
+
+                    });
+            });
+        }
+
+        loadAndRender("../data/voix-ethos.csv");
+
+        d3.select("#dataToggle").on("change", function () {
+            const useFictive = this.checked;
+            const filePath = useFictive ? "../data/voix-ethos-fictif.csv" : "../data/voix-ethos.csv";
+            selectedLabel = null;
+            selectedType = null;
+            d3.select("#dataLabel").text(useFictive ? "Données fictives" : "Données existantes");
+            loadAndRender(filePath);
+        });
+
+
+        function updateInfoBox() {
+            const box = d3.select("#infoBox");
+            box.style("display", selectedLabel ? "block" : "none");
+
+            if (!selectedLabel) return;
+
+            let relevantData = aggregatedData.filter(d =>
+                (selectedType === "ethos" && d.ethos === selectedLabel) ||
+                (selectedType === "pronoun" && d.pronoun === selectedLabel)
+            );
+
+            relevantData.sort((a, b) => b.count - a.count);
+
+            const header = selectedType === "ethos" ? `→ ${selectedLabel} vers pronoms :` : `← ${selectedLabel} utilisé par :`;
+            const lines = relevantData.map(d => {
+                return selectedType === "ethos"
+                    ? `${d.pronoun}: ${d.count}`
+                    : `${d.ethos}: ${d.count}`;
+            }).join("<br>");
+
+            box.html(`<strong>${header}</strong><br>${lines}`);
+        }
+
+
+    </script>
+</body>

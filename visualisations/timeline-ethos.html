@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Timeline</title>
-  <script src="https://d3js.org/d3.v6.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <link rel="stylesheet" href="../dist/theme/custom.css">
 
@@ -17,6 +16,11 @@
     svg {
       overflow: visible;
     }
+
+    text.book:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 
@@ -25,30 +29,43 @@
     <svg width="5000" height="500"></svg>
   </div>
 
+
+
   <script>
 
-    d3.text("../data/dates_titres.csv").then(csvText => {
-      const data = csvText.trim().split("\n").map(line => {
-        const [year, title] = line.split(";");
-        return { year: +year.trim(), title: title.trim() };
-      });
+    const ethosColors = {
+      "Ethos cosmopolite": "#835b63",
+      "Ethos d'opposition": "#465457",
+      "Ethos de genre": "#FFD447",
+      "Ethos de la migrance": "#3E5622",
+      "Ethos de la présence": "#DB7F67",
+      "Ethos environnemental": "#700353",
+      "Ethos mémoriel": "#345995"
+    };
 
-      console.log(data)
+    d3.text("../data/dates_titres_ethos.csv").then(csvText => {
+      const data = csvText.trim().split("\n").map(line => {
+        const [year, ethos, title] = line.split(";");
+        return {
+          year: +year.trim(),
+          ethos: ethos.trim(),
+          title: title.trim()
+        };
+      });
 
       const grouped = d3.groups(data, d => d.year);
       const allYears = d3.range(1943, 2026);
 
-
       const width = 5000;
-      const height = 100;
-      const margin = { top: 1, bottom: 50, left: 100, right: 100 };
+      const height = 500;
+      const margin = { top: 1, bottom: 10, left: 100, right: 100 };
       const svg = d3.select("svg");
 
       const x = d3.scaleLinear()
         .domain([1943, 2025])
         .range([margin.left, width - margin.right]);
 
-      const axisY = 480; // more equals lower
+      const axisY = 490;
 
       svg.append("g")
         .attr("transform", `translate(0,${axisY})`)
@@ -60,8 +77,8 @@
         .attr("class", "year-label")
         .attr("dy", "1.5em");
 
-      const labelHeight = 13;
-      const labelPadding = 4;
+      const labelHeight = 11;
+      const labelPadding = 2;
 
       const yearToCount = Object.fromEntries(grouped.map(([year, books]) => [year, books.length]));
 
@@ -124,10 +141,13 @@
             .attr("class", "book")
             .attr("x", xPos)
             .attr("y", y)
-            .text(book.title);
+            .attr("fill", ethosColors[book.ethos] || "#000")
+            .attr("font-size", 12)
+            .attr("cursor", "pointer")
+            .text(book.title)
+      
         });
       });
-
     });
   </script>
 </body>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Répartition des genres par ethos</title>
+  <link rel="stylesheet" href="../dist/theme/custom.css">
+
+  <style>
+    .charts-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: calc(4 * 250px + 3 * 30px);
+      margin: 0 auto;
+    }
+
+    .chart-box {
+      flex: 0 0 250px;
+    }
+
+
+    .chart-box h4 {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .bar {
+      fill: #7B6C73;
+      transition: fill 0.2s;
+    }
+
+    .bar:hover {
+      fill: #c5a6b5;
+    }
+
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+      margin-right: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #faf5f8;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.slider {
+      background-color: #848f98;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(24px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+
+    body {
+      font-family: sans-serif;
+    }
+
+    #toggle-container {
+      margin: 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #toggle-label {
+      user-select: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body style="font-family: turnip-normal">
+
+  <h3 style="text-align:center; font-family: turnip-normal;">Répartition des genres par ethos</h3>
+
+  <div id="toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="toggle-fake" />
+      <span class="slider round"></span>
+    </label>
+    <span id="toggle-label">Données existantes</span>
+  </div>
+
+  <div id="charts-container" class="charts-flex"></div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    function drawCharts(rawData) {
+      d3.select("#charts-container").html("");
+
+      const all = [];
+
+      rawData.forEach(row => {
+        const ethos = row.Ethos.trim();
+        const genres = row.Genre ? row.Genre.split(";").map(g => g.trim()) : [];
+        genres.forEach(genre => {
+          all.push({ ethos, genre });
+        });
+      });
+
+      const byEthos = d3.group(all, d => d.ethos);
+      const totalMap = d3.rollup(all, v => v.length, d => d.genre);
+
+      const chartData = [{
+        ethos: "Total",
+        values: Array.from(totalMap, ([genre, count]) => ({ genre, count }))
+      }];
+
+      byEthos.forEach((entries, ethos) => {
+        const genreCount = d3.rollup(entries, v => v.length, d => d.genre);
+        chartData.push({
+          ethos,
+          values: Array.from(genreCount, ([genre, count]) => ({ genre, count }))
+        });
+      });
+
+      const maxCount = d3.max(chartData.flatMap(section => section.values.map(d => d.count)));
+
+      const container = d3.select("#charts-container");
+
+      chartData.forEach(section => {
+        const chartDiv = container.append("div").attr("class", "chart-box");
+
+        chartDiv.append("h4").text(section.ethos);
+
+        const svg = chartDiv.append("svg")
+          .attr("width", 250)
+          .attr("height", 250);
+
+        const margin = { top: 10, right: 10, bottom: 45, left: 30 },
+          width = 250 - margin.left - margin.right,
+          height = 160 - margin.top - margin.bottom;
+
+        const x = d3.scaleBand()
+          .domain(section.values.map(d => d.genre))
+          .range([0, width])
+          .padding(0.2);
+
+        const y = d3.scaleLinear()
+          .domain([0, maxCount])
+          .range([height, 0]);
+
+        const g = svg.append("g")
+          .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        g.selectAll("rect")
+          .data(section.values)
+          .enter()
+          .append("rect")
+          .attr("class", "bar")
+          .attr("x", d => x(d.genre))
+          .attr("y", d => y(d.count))
+          .attr("width", x.bandwidth())
+          .attr("height", d => height - y(d.count));
+
+        g.append("g")
+          .attr("transform", `translate(0, ${height})`)
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+          .attr("transform", "rotate(-40)")
+          .attr("font-family", "turnip-normal")
+          .style("text-anchor", "end");
+
+        g.append("g")
+          .call(d3.axisLeft(y).ticks(3));
+      });
+    }
+    function loadAndDraw() {
+      const useFake = document.getElementById("toggle-fake").checked;
+      const label = document.getElementById("toggle-label");
+      const filePath = useFake ? "../data/ethos-genre-fictif.csv" : "../data/ethos-genre.csv";
+
+      label.textContent = useFake ? "Données fictives" : "Données existantes";
+
+      d3.dsv(";", filePath).then(data => {
+        drawCharts(data);
+      }).catch(() => {
+        d3.select("#charts-container").html("<p>Erreur de chargement des données.</p>");
+      });
+    }
+
+    document.getElementById("toggle-fake").addEventListener("change", loadAndDraw);
+
+
+    loadAndDraw();
+
+  </script>
+
+</body>
+
+</html>

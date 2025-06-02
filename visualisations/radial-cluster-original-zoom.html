@@ -15,6 +15,7 @@
     <div id="info-box" style="
       width: 250px;
       background-color: #93a8acab;
+      color: #835b63;
       color: black;
       border-radius: 8px;
       padding: 15px;
@@ -223,7 +224,9 @@
         .on("click", (event, d) => {
           if (d.children) {
             const ethosName = d.data.name;
-            const description = EthosDescriptions[ethosName] || "Cliquer sur un ethos pour lire sa description. ";
+            const description = EthosDescriptions[ethosName] || "L’ethos, c’est la manière dont un texte donne à sentir une présence humaine : une voix, une posture, une attitude face au monde. Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix narrative dominante qui parle dans le texte. C’est une manière d’approcher la littérature à partir de la voix transmise par le texte, plutôt que seulement ce qu’elle raconte, où et quand elle a été produite, et dans quel contexte.";
+
+
 
             d3.select("#info-box").html(`
         <h3>Ethos ${ethosName}</h3>

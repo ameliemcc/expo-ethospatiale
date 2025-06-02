@@ -2,12 +2,17 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-Total : 148 heures
+Total : 158 heures
 
 
+## 2 juin
+*7 heures*
+
+- barcharts genre
+- modifications timeline
 
 ## 1 juin
-*9 heures*
+*12 heures*
 
 - intro dynamique
 - format questions
@@ -35,18 +40,21 @@ Total : 148 heures
 - tuto shepherd 
 - intégration shepherd
 - écriture textes
+- tests utilisateurices
 
 ## 27 mai 
 *8 heures*
 
 - visualisation voix
 - visualisation sunburst
+- tests utilisateurices
 
 ## 26 mai
 *4 heures*
 
 - RDV IP
 - Planification tâches restantes
+- plannification tests utilisateurices
 
 ## 25 mai
 *9 heures*
@@ -54,6 +62,7 @@ Total : 148 heures
 - carte
 - texte présentation
 - intégration livres ethos
+- plannification tests utilisateurices
 
 ## 24 mai
 *8 heures*
