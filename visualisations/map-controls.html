@@ -1,3 +1,16 @@
+<!--Une partie de ce code a été généré avec chatGPT, puis a été adapté.  Le prompt suivant a été donné : 
+Le code suivant permet de filtrer un jeu de données par décennie:
+<label style="  font-size: 16px; margin-bottom: 10px; display: inline-block;" class="decadeOnOff"><input
+type="checkbox" id="toggleDecadeFilter" checked> Filtrer par décennie </label>
+<label style="font-size: 16px;" class="decadeSlider">Sélectionner la décennie: </label>
+<input type="range" id="decadeSlider" min="1940" max="2020" step="10" value="2020">
+<span style="font-size: 14px; margin-bottom: 10px; display: inline-block;" id="decadeLabel">2020</span>
+Le composant inclut un checkbox pour activer/désactiver le filtre, un slider pour sélectionner la décennie 
+(de 1940 à 2020, par pas de 10 ans), et un affichage de la valeur sélectionnée. Le composant doit sauvegarder 
+les choix dans localStorage et envoyer les paramètres sélectionnés via postMessage à un iframe parent nommé 
+"map.html". Ajoute également un script pour ajuster automatiquement la hauteur d'un iframe appelé 
+"questionFrame" en fonction de son contenu.
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
