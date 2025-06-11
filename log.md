@@ -2,8 +2,18 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-Total : 158 heures
+Total : 167 heures
 
+# 10 juin#
+*5 heures*
+
+- ReadMe amélioré
+- ajout de sources
+
+## mai-juin
+*4 heures*
+
+- protocole de test, entretiens
 
 ## 2 juin
 *7 heures*
