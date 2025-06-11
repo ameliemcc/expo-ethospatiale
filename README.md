@@ -1,16 +1,9 @@
-  <style>
-    .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-}
-    </style>
+
 
 # Configuration EthoSpatiale : Pour une nouvelle histoire littéraire subsaharienne de langue française
-## Une exposition en ligne comme point de départ d'hypothèses de recherche et de réflexions
+# Une exposition en ligne comme point de départ d'hypothèses de recherche et de réflexions
 
-### Présentation du projet et de ses fonctionnalités
+## Présentation du projet et de ses fonctionnalités
 
 **Configuration EthoSpatiale** est une exposition en ligne accompagnant un [projet de recherche](https://data.snf.ch/grants/grant/219693) financé par le Fonds National Suisse (FNS) et dirigé par Christine Le Quellec Cottier (Section de français, UNIL). Ce projet vise à réévaluer les classifications et périodisations traditionnelles qui définissent la catégorie « littérature subsaharienne de langue française ».
 
