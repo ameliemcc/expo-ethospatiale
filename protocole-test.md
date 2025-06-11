@@ -21,7 +21,7 @@ Les éléments principaux qui sont ressortis de cet entretien sont les suivants 
 Cette partie du protocole de test s'est déroulée en 3 temps :
 
 1. Visite de l'exposition en ligne, sans commentaires/explications préalables de ma part
-2. Réponse au questionnaire (annexe 1)
+2. Réponse au questionnaire (annexe)
 3. Entretien au cours duquel les réponses au questionnaire ont été discutées
 
 ---
@@ -128,13 +128,16 @@ L'intérêt pour la précision de la notion de "littérature africaine" semble c
 
 La définition d'ethos donnée par les utilisateur·ice·s test ne comprend pas la notion de "voix narrative dominante", qui est pourtant centrale. 
 > Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix narrative dominante qui parle dans le texte. C’est une manière d’approcher la littérature à partir de la voix transmise par le texte, plutôt que seulement ce qu’elle raconte, où et quand elle a été produite, et dans quel contexte. (Texte de l'exposition)
+
+
+
 Ce manquement pourrait potentiellement être corrigé par une partie "conclusion", qui reviendrait sur les définitions importantes de l'approche.
 
 
 
 
 ---
-## Annexe 1 : questionnaire expérience utilisateur·ice de l’exposition en ligne Configuration EthoSpatiale : Pour une relecture critique de la littérature subsaharienne de langue française
+## Annexe : questionnaire expérience utilisateur·ice de l’exposition en ligne Configuration EthoSpatiale : Pour une relecture critique de la littérature subsaharienne de langue française
 
 **Réponses de 1 (très négatif) à 10 (très positif)**
 

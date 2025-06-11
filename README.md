@@ -7,7 +7,7 @@
 
 **Configuration EthoSpatiale** est une exposition en ligne accompagnant un [projet de recherche](https://data.snf.ch/grants/grant/219693) financé par le Fonds National Suisse (FNS) et dirigé par Christine Le Quellec Cottier (Section de français, UNIL). Ce projet vise à réévaluer les classifications et périodisations traditionnelles qui définissent la catégorie « littérature subsaharienne de langue française ».
 
-À travers cette exposition, le projet propose une nouvelle histoire littéraire fondée sur l’articulation de l’ethos (la voix énonciative et ses expressions) et de l’espace, en remettant en question les cadres hérités d’une approche européenne et colonialiste.
+Le projet propose une nouvelle histoire littéraire fondée sur l’articulation de l’ethos (la voix énonciative et ses expressions) et de l’espace, en remettant en question les cadres hérités d’une approche européenne et colonialiste.
 
 ---
 

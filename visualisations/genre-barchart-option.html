@@ -140,6 +140,7 @@
 
       rawData.forEach(row => {
         const ethos = row.Ethos.trim();
+        // transformation en tableau
         const genres = row.Genre ? row.Genre.split(";").map(g => g.trim()) : [];
         genres.forEach(genre => {
           all.push({ ethos, genre });
