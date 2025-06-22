@@ -10,81 +10,11 @@ Intègrer un toggle switch pour charger deux fichiers différents : l’un avec 
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-    body {
-        font: 12px sans-serif;
-    }
-
-    .line {
-        fill: none;
-        stroke-opacity: 0.3;
-    }
-
-    .line.selected {
-        stroke-opacity: 1;
-    }
-
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 50px;
-        height: 26px;
-        margin-right: 10px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: .4s;
-        border-radius: 34px;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 20px;
-        width: 20px;
-        left: 3px;
-        bottom: 3px;
-        background-color: #faf5f8;
-        transition: .4s;
-        border-radius: 50%;
-    }
-
-    input:checked+.slider {
-        background-color: #848f98;
-    }
-
-    input:checked+.slider:before {
-        transform: translateX(24px);
-    }
-
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-</style>
 <link rel="stylesheet" href="../dist/theme/custom.css">
 
 <body>
 
     <h3 style="text-align:center; font-family: turnip-normal;">Voix narratives dominantes par ethos</h3>
-
     <div class="turnip-normal" style="width: 100%; display: flex; justify-content: center;">
         <svg width="1000" height="450"></svg>
     </div>
@@ -111,19 +41,15 @@ Intègrer un toggle switch pour charger deux fichiers différents : l’un avec 
     z-index: 1000;
 "></div>
 
-
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
         let aggregatedData = [];
-
-
         let selectedLabel = null;
         let selectedType = null;
         const svg = d3.select("svg");
         const width = +svg.attr("width");
         const height = +svg.attr("height");
         const margin = { top: 20, bottom: 20, left: 250, right: 200 };
-
         const ethosColors = {
             "Ethos cosmopolite": "#E2B4BD",
             "Ethos d'opposition": "#93A8AC",
@@ -136,7 +62,6 @@ Intègrer un toggle switch pour charger deux fichiers différents : l’un avec 
 
         function loadAndRender(dataPath) {
             svg.selectAll("*").remove();
-
             d3.dsv(";", dataPath).then(raw => {
                 const expandedData = raw.flatMap(row => {
                     const ethos = row["Ethos d'opposition"]?.trim() || row["Ethos de genre"]?.trim() || row["Ethos de la migrance"]?.trim() || row["Ethos cosmopolite"]?.trim() || row["Ethos"]?.trim();
@@ -280,7 +205,6 @@ Intègrer un toggle switch pour charger deux fichiers différents : l’un avec 
                     ? `${d.pronoun}: ${d.count}`
                     : `${d.ethos}: ${d.count}`;
             }).join("<br>");
-
             box.html(`<strong>${header}</strong><br>${lines}`);
         }
 

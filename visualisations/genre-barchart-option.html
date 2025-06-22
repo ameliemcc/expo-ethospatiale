@@ -1,121 +1,17 @@
- <!--Une partie de ce code a été généré avec chatGPT, puis a été adapté.  Le prompt suivant a été donné : 
+<!--Une partie de ce code a été généré avec chatGPT, puis a été adapté.  Le prompt suivant a été donné : 
  Create a responsive HTML page using D3.js that shows multiple bar charts representing the distribution of literary genres by "ethos".
 - Each chart should show the genre distribution for one ethos.
 - Include a chart for the overall total as well.
 - The data is in semicolon-separated CSV format with columns "Ethos" and "Genre", where "Genre" may contain multiple genres separated by semicolons.
 - Use D3.js v7-->
- 
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8" />
   <title>Répartition des genres par ethos</title>
   <link rel="stylesheet" href="../dist/theme/custom.css">
-
-  <style>
-    .charts-flex {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: calc(4 * 250px + 3 * 30px);
-      margin: 0 auto;
-    }
-
-    .chart-box {
-      flex: 0 0 250px;
-    }
-
-
-    .chart-box h4 {
-      text-align: center;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .bar {
-      fill: #7B6C73;
-      transition: fill 0.2s;
-    }
-
-    .bar:hover {
-      fill: #c5a6b5;
-    }
-
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-      margin-right: 10px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background-color: #faf5f8;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    input:checked+.slider {
-      background-color: #848f98;
-    }
-
-    input:checked+.slider:before {
-      transform: translateX(24px);
-    }
-
-    .slider.round {
-      border-radius: 34px;
-    }
-
-    .slider.round:before {
-      border-radius: 50%;
-    }
-
-
-    body {
-      font-family: sans-serif;
-    }
-
-    #toggle-container {
-      margin: 20px;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #toggle-label {
-      user-select: none;
-      font-weight: 600;
-    }
-  </style>
 </head>
 
 <body style="font-family: turnip-normal">
@@ -238,4 +134,3 @@
 </body>
 
 </html>
-

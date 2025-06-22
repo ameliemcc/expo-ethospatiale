@@ -7,27 +7,13 @@
   <meta charset="UTF-8">
   <title>Sunburst zoomable des ethos primaires et secondaires</title>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
+  <link rel="stylesheet" href="../dist/theme/custom.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-    }
 
-    svg {
-      width: 900;
-      height: 900;
-      display: block;
-      margin: 300;
-
-    }
-  </style>
 </head>
 
 <body>
-  <svg></svg>
-
+  <svg class="sunburst"></svg>
 
   <script>
     const CouleursEthos = {

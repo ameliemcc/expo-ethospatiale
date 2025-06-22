@@ -266,7 +266,7 @@ blockquote {
   flex: 1;
   overflow-y: auto;
   padding-left: 15px;
-  padding-top: 50px;
+  padding-top: 5px;
 }
 
 
@@ -280,6 +280,7 @@ blockquote {
 .fiche {
   width: 100%;
   max-width: 600px;
+  height: auto;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 15px;
@@ -287,21 +288,25 @@ blockquote {
   padding: 15px;
   border-radius: 8px;
   align-items: start;
-  margin: 50px;
+  margin: 0px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .fiche-text {
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1;
   display: flex;
+  margin-top: 0px;
+  margin-bottom: 0px;
   flex-direction: column;
+  gap: 4px;
+  
 }
+
 
 
 .fiche-image img {
   width: 200px;
-  height: auto;
   object-fit: contain;
 
 }
@@ -322,7 +327,9 @@ blockquote {
 .fiche-description {
   margin: 0;
   text-align: justify;
-
+  padding-bottom: 2px;
+    margin-bottom: 0;
+  padding-bottom: 0;
 
 }
 
@@ -332,6 +339,13 @@ blockquote {
   display: block;
 }
 
+.citation {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 10px;
+}
 
 .main-map {
   height: 100%;
@@ -787,6 +801,203 @@ section.has-dark-background h6 {
   border-color: var(--r-link-color);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
+
+
+    .charts-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: calc(4 * 250px + 3 * 30px);
+      margin: 0 auto;
+    }
+
+    .chart-box {
+      flex: 0 0 250px;
+    }
+
+
+    .chart-box h4 {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .bar {
+      fill: #7B6C73;
+      transition: fill 0.2s;
+    }
+
+    .bar:hover {
+      fill: #c5a6b5;
+    }
+
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+      margin-right: 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #faf5f8;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked+.slider {
+      background-color: #848f98;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(24px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+        svg.sunburst {
+      width: 900;
+      height: 900;
+      display: block;
+      margin: 300;
+    }
+
+
+
+    .line {
+        fill: none;
+        stroke-opacity: 0.3;
+    }
+
+    .line.selected {
+        stroke-opacity: 1;
+    }
+
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+        margin-right: 10px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: #faf5f8;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked+.slider {
+        background-color: #848f98;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(24px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+        body.timeline {
+      margin: 0;
+      padding: 0;
+    }
+
+    svg.timeline {
+      overflow: visible;
+    }
+
+    text.book:hover {
+      text-decoration: underline;
+    }
+
+
+    @font-face {
+      font-family: "turnip-normal";
+      src: url("../dist/theme/fonts/turnip/Turnip-Book.otf");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    .leaflet-control-layers-overlays {
+      font-family: "turnip-normal";
+      font-size: 15px;
+    }
+
+    #toggle-container {
+      margin: 20px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #toggle-label {
+      user-select: none;
+      font-weight: 600;
+    }
 
 /*********************************************
  * NAVIGATION CONTROLS

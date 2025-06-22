@@ -18,7 +18,12 @@ Enfin, la carte doit réagir à des messages externes pour changer le filtre dé
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="../dist/theme/shepherd-style.css">
-  <style>
+    <link rel="stylesheet" href="../dist/theme/custom.css">
+
+</head>
+<style>
+
+
     html,
     body,
     #map {
@@ -29,21 +34,7 @@ Enfin, la carte doit réagir à des messages externes pour changer le filtre dé
       border-radius: 8px;
     }
 
-
-    @font-face {
-      font-family: "turnip-normal";
-      src: url("../dist/theme/fonts/turnip/Turnip-Book.otf");
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    .leaflet-control-layers-overlays {
-      font-family: "turnip-normal";
-      font-size: 15px;
-    }
-  </style>
-</head>
-
+</style>
 <body>
   <div id="map"></div>
 

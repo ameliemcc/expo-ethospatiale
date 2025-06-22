@@ -18,28 +18,12 @@ Les titres des livres ne doivent pas se superposer : place-les de manière à é
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <link rel="stylesheet" href="../dist/theme/custom.css">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    svg {
-      overflow: visible;
-    }
-
-    text.book:hover {
-      text-decoration: underline;
-    }
-  </style>
 </head>
 
-<body>
+<body class="timeline">
   <div>
-    <svg width="5000" height="500"></svg>
+    <svg class="timeline" style="width:5000;height:100%" ></svg>
   </div>
-
-
 
   <script>
 
@@ -75,7 +59,7 @@ Les titres des livres ne doivent pas se superposer : place-les de manière à é
         .domain([1943, 2025])
         .range([margin.left, width - margin.right]);
 
-      const axisY = 490;
+      const axisY = 470;
 
       svg.append("g")
         .attr("transform", `translate(0,${axisY})`)
