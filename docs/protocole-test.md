@@ -1,22 +1,29 @@
 # Protocole de test de l'exposition en ligne
 
-Dans le but d'évaluer l'efficacité communicative de cette exposition en ligne, deux formes de protocoles de test ont été mis en place : 
+Dans le but d'évaluer l'efficacité communicative de cette exposition en ligne, trois formes de protocole de test ont été mises en place : 
 
-1. Entretien avec mes collègues du projet de recherche "Configuration EthoSpatiale"
+1. Entretien informel avec mes collègues du projet de recherche "Configuration EthoSpatiale" au cours de la réalisation du projet
 2. Questionnaire et entretien avec 3 étudiant·e·s en littérature francophone
+3. Présentation du projet fini et entretien avec Christine Lequellec Cottier, Tamara Krakus, Jehanne Denogent et Camille Ulrich. 
+  
+<details>  
+<summary style="font-size: 1.6em; font-weight: bold;"> 1. Entretien avec collègues de recherche au cours de la réalisation du projet</summary>
 
-## Entretien avec collègues de recherche
 
 Au cours d'un entretien, j'ai présenté les différentes visualisations du projet. 
 Les réponses et réactions de mes collègues ont informé mes choix.
 Les éléments principaux qui sont ressortis de cet entretien sont les suivants : 
 
-- Importance d'avoir une carte montrant les différents ethos, les textes du corpus et l'année de publication -> lecture facilitée à l'aide d'un code couleur
+- Importance d'avoir une carte montrant les différents ethè, les textes du corpus et l'année de publication -> lecture facilitée à l'aide d'un code couleur
 - Visualisation des voix narratives dominantes à lier absolument avec la notion d'ethos, dans le but de mettre cette notion au centre
 - Frise chronologique à contextualiser, afin de ne pas dévier de l'un des propos (sortir des catégorisations historiques "classiques")
+- Besoin de visualisations montrant la répartition des voix narratives dominantes, les genre littéraires, et les ethè secondaires.
 
+</details>  
 
-## Questionnaires et entretiens avec des étudiant·e·s en littérature francophone
+<details>  
+<summary style="font-size: 1.6em; font-weight: bold;"> 2. Questionnaires et entretiens avec des étudiant·e·s en littérature francophone </summary>
+
 
 Cette partie du protocole de test s'est déroulée en 3 temps :
 
@@ -26,10 +33,10 @@ Cette partie du protocole de test s'est déroulée en 3 temps :
 
 ---
 
-## Synthèse des retours via questionnaire sur l’exposition en ligne  
+### Synthèse des retours via questionnaire sur l’exposition en ligne  
 
 
-### Évaluation générale (notes sur 10)
+### *Évaluation générale (notes sur 10)*
 
 | Critère                              | Moyenne des réponses |
 |--------------------------------------|------------------------|
@@ -42,7 +49,7 @@ Cette partie du protocole de test s'est déroulée en 3 temps :
 
 ---
 
-### Parcours thématiques
+### *Parcours thématiques*
 
 - **Le plus intéressant :**
   - *Qu’est-ce qu’une littérature africaine*
@@ -66,7 +73,7 @@ Cette partie du protocole de test s'est déroulée en 3 temps :
 
 ---
 
-### Compréhensions clés
+### *Compréhensions clés*
 
 - **Qu’est-ce qu’un ethos ?**
     - "un thème associable à un texte"
@@ -91,7 +98,7 @@ Cette partie du protocole de test s'est déroulée en 3 temps :
 
 ---
 
-### Réponses Vrai / Faux
+### *Réponses Vrai / Faux*
 
 | Affirmation                                               | Réponse 1 | Réponse 2 | Réponse 3 |
 |-----------------------------------------------------------|-----------|-----------|-----------|
@@ -106,7 +113,7 @@ Cette partie du protocole de test s'est déroulée en 3 temps :
 - **Points positifs :**
   - Clarté, qualité rédactionnelle, utilisation de questions qui sucitent l'interêt
   - Bonne mise en valeur des contenus, explication des visualisations
-  - Intérêt des exemples concrets d’ethos liés à des textes
+  - Intérêt des exemples concrets d'ethè liés à des textes
 
 - **Critiques / Suggestions :**
   - Navigation pas toujours intuitive
@@ -122,6 +129,7 @@ Les réponses apportées ont influencé certains de mes choix finaux, dans le bu
 - Développement des réponses suggérées pour les questions accompagnant les visualisations.
 - Des explications sur le fonctionnement de certaines pages ont été rajoutées avec shepherd.js.
 - Plutôt que de présenter 3 textes exemple par ethos, seulement 2 sont présentés. 
+- Ajout d’une partie « conclusion »
 
 Dans l'ensemble, il parait que la matière a été relativement bien comprise.
 L'intérêt pour la précision de la notion de "littérature africaine" semble claire. Il faut toutefois noter que les étudiant·e·s interrogés avaient déjà quelques notions sur le sujet, ce qui a pu informer leurs réponses. <br>
@@ -129,15 +137,40 @@ L'intérêt pour la précision de la notion de "littérature africaine" semble c
 La définition d'ethos donnée par les utilisateur·ice·s test ne comprend pas la notion de "voix narrative dominante", qui est pourtant centrale. 
 > Autrement dit, c’est ce que le·a lecteur·ice perçoit de la voix narrative dominante qui parle dans le texte. C’est une manière d’approcher la littérature à partir de la voix transmise par le texte, plutôt que seulement ce qu’elle raconte, où et quand elle a été produite, et dans quel contexte. (Texte de l'exposition)
 
-
-
 Ce manquement pourrait potentiellement être corrigé par une partie "conclusion", qui reviendrait sur les définitions importantes de l'approche.
 
+</details>  
+
+
+<details>  
+<summary style="font-size: 1.6em; font-weight: bold;"> 3. Entretien avec collègues de recherche en phase finale de réalisation</summary>
+
+Après avoir terminé la réalisation du projet, j’ai l’ai présenté à mes collègues Christine Le Quellec Cottier, Tamara Krakus, Jehanne Denogent et Camille Ulrich. Leurs commentaires ont amené à quelques modifications, ainsi qu’à des pistes d’ouvertures et d’amélioration. Leurs commentaires ont également légitimé l’existence des visualisations réalisées, qui leurs sont apparues comme très utiles. 
+
+### Commentaires critiques (points à modifier avant diffusion du projet à un public plus large)
+-	Certains textes sont à revoir pour plus de clarté -> Certaines modifications apportées aux formulations, RDV prévu avec Christine Le Quellec Cottier pour finaliser la relecture scientifique en juillet. 
+-	Terminologie : ethos au pluriel = ethè -> Changement effectué dans toute l’exposition.
+-	Nécessité d’avoir accès au projet en ligne.
+-	Idéalement, les visualisations devraient permettre d’accéder à l’entier du contenu des « fiches » texte.
+-	Un dendrogramme montrant la répartition des voix narratives dominantes par ethos serait utile.
+
+### Apports relevés 
+-	Observation des visualisations fait émerger des liens, et encourage à un autre niveau d’interprétation.
+-	Vision d’ensemble du corpus met en évidence les potentielles lacunes -> Permet d’orienter la recherche de textes pour le corpus en fonction de ce qu’il manque (en termes de période temporelle, d’ethos, ou de genre).
+-	Valorisation esthétique du corpus -> Images utilisables pour illustrer des articles, des présentations, etc.
+-	Question d’interprétations bien choisies, reflètent des questionnements du projet de recherche et des problématiques qui seront abordées dans le cours « Configuration EthoSpatiale ».
 
 
 
----
-## Annexe : questionnaire expérience utilisateur·ice de l’exposition en ligne Configuration EthoSpatiale : Pour une relecture critique de la littérature subsaharienne de langue française
+
+
+</details>  
+
+
+<details>  
+<summary style="font-size: 1.6em; font-weight: bold;">Annexe : questionnaire expérience utilisateur·ice de l’exposition en ligne Configuration EthoSpatiale : Pour une relecture critique de la littérature subsaharienne de langue française </summary>
+
+
 
 **Réponses de 1 (très négatif) à 10 (très positif)**
 
@@ -183,3 +216,4 @@ Je me suis perdue dans la navigation pendant mon parcours
 Je suis revenue en arrière plusieurs fois
 
 J’ai lu tout le texte écrit dans la présentation
+</details>  

@@ -2,7 +2,9 @@
 
 6 crédits ECTS = 150 à 180 heures de travail
 
-Total : 167 heures
+
+Total avant examen du 12 juin : 167 heures
+Total après examen du 12 juin : 
 
 
 | Date     | Heures | Tâches   | Type de tâche  |
@@ -57,3 +59,6 @@ Total : 167 heures
 | 04.févr  | 3,00   | Lectures, observation visualisations                                                            | Lecture                        |
 | 02.févr  | 3,00   | Lectures, observation visualisations                                                            | Lecture                        |
 | 18.janv  | 4,00   | Conception des objectifs du projet                                                              | Conception                     |
+
+
+  <img src="../data/images/taches.png" alt="taches" width="500" >

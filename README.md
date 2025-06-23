@@ -96,7 +96,7 @@ Les visualisations présentées dans l'exposition peuvent servir d'outil de trav
 <li>Cloner ou télécharger le projet.</li>
 <li>Ouvrir le projet dans un éditeur compatible tel Visual Studio Code. </li>
 <li>Installer l’extension Live Server.</li>
-<li> Lancer le projet avec Live Server : Clic droit sur le fichier <em>presentation.html</em>, sélectionner "Open with Live Server".</li>
+<li> Lancer le projet avec Live Server : Clic droit sur le fichier <em>index.html</em>, sélectionner "Open with Live Server".</li>
 </ol>
 
 ---
